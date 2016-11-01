@@ -1,6 +1,6 @@
 {
-    "appSecret": "",
-    "pageAccessToken": "",
-    "validationToken": "",
-    "serverURL": ""
+    "appSecret": "d841e02c0b864a2568e2e7a437e7a40b",
+    "pageAccessToken": "EAADHa8uhuN8BAEEgE7M1ZBZA8Ln9RZCtnFG9cQIV0gZCdQP2TbwpCZCoCZAGtw0RSug0oGqzeP2ZCMsSPf1oJvrGW9GZBarDs8T6fGRrRNvd9V0yUVp07hTDfMOCdgYESrBUcKsZBb106iFOqnZCJtSffh4pkF4NuVAIHfbbZBoXXda0AZDZD",
+    "validationToken": "gizmo-bot-verify-token",
+    "serverURL": "https://bot-test-gizmo.herokuapp.com/"
 }
