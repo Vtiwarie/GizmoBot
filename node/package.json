@@ -1,7 +1,7 @@
 {
-  "name": "messenger-get-started",
+  "name": "Gizmo Bot",
   "version": "1.0.0",
-  "description": "Get started example for Messenger Platform",
+  "description": "Gizmo Bot Test",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
@@ -12,7 +12,7 @@
     "type": "git",
     "url": "https://github.com/fbsamples/messenger-platform-samples.git"
   },
-  "author": "Facebook",
+  "author": "Vishaan Tiwarie",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.0",
@@ -22,6 +22,6 @@
     "request": "^2.72.0"
   },
   "engines": {
-    "node": "~4.1.2"
+    "node": "6.9.1"
   }
 }
