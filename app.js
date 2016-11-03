@@ -33,7 +33,7 @@ app.use(express.static('public'));
 process.env.MESSENGER_APP_SECRET = 'd841e02c0b864a2568e2e7a437e7a40b';
 process.env.MESSENGER_VALIDATION_TOKEN = 'gizmo-bot-verify-token';
 process.env.MESSENGER_PAGE_ACCESS_TOKEN = 'EAADHa8uhuN8BAEEgE7M1ZBZA8Ln9RZCtnFG9cQIV0gZCdQP2TbwpCZCoCZAGtw0RSug0oGqzeP2ZCMsSPf1oJvrGW9GZBarDs8T6fGRrRNvd9V0yUVp07hTDfMOCdgYESrBUcKsZBb106iFOqnZCJtSffh4pkF4NuVAIHfbbZBoXXda0AZDZD';
-process.env.SERVER_URL = 'https://bot-test-gizmo.herokuapp.com';
+process.env.SERVER_URL = 'https://bot-test-gizmo.herokuapp.com/';
 
 
 // App Secret can be retrieved from the App Dashboard
@@ -90,7 +90,7 @@ app.post('/webhook', function (req, res) {
   var data = req.body;
 
   // Make sure this is a page subscription
-  /*if (data.object == 'page') {
+  if (data.object == 'page') {
     // Iterate over each entry
     // There may be multiple if batched
     data.entry.forEach(function(pageEntry) {
@@ -115,8 +115,7 @@ app.post('/webhook', function (req, res) {
           console.log("Webhook received unknown messagingEvent: ", messagingEvent);
         }
       });
-	  */
-    //});
+    });
 
     // Assume all went well.
     //
@@ -147,10 +146,6 @@ app.get('/authorize', function(req, res) {
     redirectURI: redirectURI,
     redirectURISuccess: redirectURISuccess
   });
-});
-
-app.get('/', function (req, res) {
-  res.render('index', {});
 });
 
 /*
