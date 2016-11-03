@@ -26,9 +26,15 @@ app.use(express.static('public'));
 
 /*
  * Be sure to setup your config values before running this code. You can 
- * set them using environment variables or modifying the config file in /config.
+ * set them using environment rvariables or modifying the config file in /config.
  *
  */
+ 
+process.env.MESSENGER_APP_SECRET = 'd841e02c0b864a2568e2e7a437e7a40b';
+process.env.MESSENGER_VALIDATION_TOKEN = 'gizmo-bot-verify-token';
+process.env.MESSENGER_PAGE_ACCESS_TOKEN = 'EAADHa8uhuN8BAEEgE7M1ZBZA8Ln9RZCtnFG9cQIV0gZCdQP2TbwpCZCoCZAGtw0RSug0oGqzeP2ZCMsSPf1oJvrGW9GZBarDs8T6fGRrRNvd9V0yUVp07hTDfMOCdgYESrBUcKsZBb106iFOqnZCJtSffh4pkF4NuVAIHfbbZBoXXda0AZDZD';
+process.env.SERVER_URL = 'https://bot-test-gizmo.herokuapp.com/';
+
 
 // App Secret can be retrieved from the App Dashboard
 const APP_SECRET = (process.env.MESSENGER_APP_SECRET) ? 
