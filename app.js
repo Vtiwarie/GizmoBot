@@ -336,8 +336,8 @@ function receivedMessage(event) {
 		sendTextMessage(senderID, "Message with attachment received");
 		break;
 		
-	  case 'ending call':
-	 case 'rejecting call':
+	  case 'Ending call':
+	 case 'Rejecting call':
 	    sendButtonMessage(senderID, "I am sorry that you are experiencing issues with the ending  calls feature.  Is this happening  when:", [{
             type: "postback",
             title: 'Gizmo calls out?',
@@ -351,28 +351,31 @@ function receivedMessage(event) {
 		break;
 		
 		
-		case 'change primary caregiver':
-		  case 'change caregiver':
-		    case 'change 1st caregiver':
+		case 'Change primary caregiver':
+		  case 'Change caregiver':
+		    case 'Change 1st caregiver':
 		      sendButtonMessage(senderID, "I am sorry that you are experiencing issues with the ending  calls feature.  Is this happening  when:", 
 		      [{
-            type: "postback",
-            title: 'Yes, Please send me reset instructions?',
-              payload: {
-                  attachment: {
-                type: "file",
-                payload: {
-                  url: SERVER_URL + "/assets/test.txt"
-                }
+            attachment:{
+            type:"template",
+            payload: {
+                url: SERVER_URL + "/assets/Factory Reset Gizmo.pdf"
               }
-          }
+          } 
           }, {
-            type: 'postback',
+            type: 'web_url',
             title: 'No, I just want to change other contacts on the gizmo.',
-            payload: 'When a caregiver or contact Initiates call to Gizmo. Once the call is answered the Gizmo will not disconnect call. Call on this case  must be disconnected by contact to end call.'
+            payload: '',  
           }])
           
-          /*sendFileMessage(senderID, {
+          /*attachment: {
+        type: "image",
+        payload: {
+          url: SERVER_URL + "/assets/rift.png"
+        }
+      }*/
+          
+         /* sendFileMessage(senderID, {
             attachment: {
               type: "file",
               payload: {
