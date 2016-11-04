@@ -358,8 +358,6 @@ function receivedMessage(event) {
 		      [{
             type: "postback",
             title: 'Yes, Please send me reset instructions?',
-            payload: {
-              type: "file",
               payload: {
                   attachment: {
                 type: "file",
@@ -367,8 +365,7 @@ function receivedMessage(event) {
                   url: SERVER_URL + "/assets/test.txt"
                 }
               }
-            }
-
+          }
           }, {
             type: 'postback',
             title: 'No, I just want to change other contacts on the gizmo.',
