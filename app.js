@@ -354,7 +354,7 @@ function receivedMessage(event) {
 		case 'Change primary caregiver':
 		  case 'Change caregiver':
 		    case 'Change 1st caregiver':
-		      sendButtonMessage(senderID, "I am sorry that you are experiencing issues with the ending  calls feature.  Is this happening  when:", 
+		      sendButtonMessage(senderID, "Great! I can help you with your request to change primary caregiver. To change primary caregivers the gizmo will need to be reset. Before we proceed please be aware that this will require linking to the gizmo and adding all contacts & settings as if it were a  new gizmo. ", 
 		      [{
             type:"web_url",
             url: SERVER_URL + "/assets/Factory Reset Gizmo.pdf",
@@ -362,26 +362,10 @@ function receivedMessage(event) {
             webview_height_ratio: "compact"
           }, {
             type:"web_url",
-            url: SERVER_URL + "/assets/iAdding or Removing Caregivers.pdf",
+            url: SERVER_URL + "/assets/Adding or Removing Caregivers.pdf",
             title:"No, I just want to change other contacts on the gizmo.",
             webview_height_ratio: "compact" 
           }])
-          
-          /*attachment: {
-        type: "image",
-        payload: {
-          url: SERVER_URL + "/assets/rift.png"
-        }
-      }*/
-          
-         /* sendFileMessage(senderID, {
-            attachment: {
-              type: "file",
-              payload: {
-                url: SERVER_URL + "/assets/test.txt"
-              }
-            }*/
-
 		    
 		    break;
 		
