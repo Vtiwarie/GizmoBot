@@ -315,6 +315,28 @@ function receivedMessage(event) {
       case 'account linking':
         sendAccountLinking(senderID);
         break;
+		
+	  case 'register':
+	    sendTextMessage(senderID, "Message with attachment received");
+		break;
+		
+	  case 'end':
+		sendTextMessage(senderID, "Message with attachment received");
+		break;
+		
+	  case 'ending call':
+	    sendButtonMessage(senderID, "I am sorry that you are experiencing issues with the calling features. Is this happening when:");
+		break;
+		
+	  case 'reset':
+		sendTextMessage(senderID, "Message with attachment received");
+	     break;
+		 
+	case 'adding a gizmo':
+		sendTextMessage(senderID, "Message with attachment received");
+		break;
+		
+		
 
       default:
         sendTextMessage(senderID, messageText);
@@ -545,7 +567,7 @@ function sendTextMessage(recipientId, messageText) {
  * Send a button message using the Send API.
  *
  */
-function sendButtonMessage(recipientId) {
+function sendButtonMessage(recipientId, messageText) {
   var messageData = {
     recipient: {
       id: recipientId
@@ -555,7 +577,7 @@ function sendButtonMessage(recipientId) {
         type: "template",
         payload: {
           template_type: "button",
-          text: "This is test text",
+          text: (messageText && messageText != "") ? messageText : "This is a test button text",
           buttons:[{
             type: "web_url",
             url: "https://www.oculus.com/en-us/rift/",
