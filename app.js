@@ -341,12 +341,12 @@ function receivedMessage(event) {
 	    sendButtonMessage(senderID, "I am sorry that you are experiencing issues with the ending  calls feature.  Is this happening  when:", [{
             type: "postback",
             title: 'Gizmo calls out?',
-            postback:{payload: "As long as the gizmo initiates the call to a caregiver of contact, it can hang up on the user."}
+            payload: "As long as the gizmo initiates the call to a caregiver of contact, it can hang up on the user."
 
           }, {
             type: "postback",
             title: "Gizmo receives call?",
-            postback:{payload: "When a caregiver or contact Initiates call to Gizmo. Once the call is answered the Gizmo will not disconnect call. Call on this case  must be disconnected by contact to end call."}
+            payload: "When a caregiver or contact Initiates call to Gizmo. Once the call is answered the Gizmo will not disconnect call. Call on this case  must be disconnected by contact to end call."
           }]);
 		break;
 		
