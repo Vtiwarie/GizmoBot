@@ -337,8 +337,37 @@ function receivedMessage(event) {
 		break;
 		
 	  case 'ending call':
-	    sendButtonMessage(senderID, "I am sorry that you are experiencing issues with the calling features. Is this happening when:");
+	 case 'rejecting call':
+	    sendButtonMessage(senderID, "I am sorry that you are experiencing issues with the ending  calls feature.  Is this happening  when:", [{
+            type: "postback",
+            title: 'Gizmo calls out?',
+            payload: "As long as the gizmo initiates the call to a caregiver of contact, it can hang up on the user."
+
+          }, {
+            type: "postback",
+            title: "Gizmo receives call?",
+            payload: "When a caregiver or contact Initiates call to Gizmo. Once the call is answered the Gizmo will not disconnect call. Call on this case  must be disconnected by contact to end call."
+
+          }]);
 		break;
+		
+		
+		case 'change primary caregiver':
+		  case 'change caregiver':
+		    case 'change 1st caregiver':
+		    sendButtonMessage(senderID, "I am sorry that you are experiencing issues with the ending  calls feature.  Is this happening  when:", [{
+            type: "postback",
+            title: "As long as the gizmo initiates the call to a caregiver of contact, it can hang up on the user.",
+            payload: "DEVELOPER_DEFINED_PAYLOAD"
+
+          }, {
+            type: "postback",
+            title: "Gizmo receives call?",
+            payload: "DEVELOPER_DEFINED_PAYLOAD"
+
+          }]);
+		    
+		    break;
 		
 	  case 'reset':
 		sendTextMessage(senderID, "Message with attachment received");
