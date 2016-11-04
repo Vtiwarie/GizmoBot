@@ -361,7 +361,11 @@ function receivedMessage(event) {
             payload: {
               type: "file",
               payload: {
-                url: SERVER_URL + "/assets/test.txt"
+                  attachment: {
+                type: "file",
+                payload: {
+                  url: SERVER_URL + "/assets/test.txt"
+                }
               }
             }
 
