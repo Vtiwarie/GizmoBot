@@ -317,7 +317,19 @@ function receivedMessage(event) {
         break;
 		
 	  case 'register':
-	    sendTextMessage(senderID, "Message with attachment received");
+	    sendButtonMessage(senderID, "Message with attachment received", [{
+            type: "web_url",
+            url: "https://www.oculus.com/en-us/rift/",
+            title: "Would you like to register an account?"
+          }, {
+            type: "postback",
+            title: "Trigger Postback",
+            payload: "DEVELOPER_DEFINED_PAYLOAD"
+          }, {
+            type: "phone_number",
+            title: "Call Phone Number",
+            payload: "+16505551234"
+          }]);
 		break;
 		
 	  case 'end':
@@ -567,7 +579,11 @@ function sendTextMessage(recipientId, messageText) {
  * Send a button message using the Send API.
  *
  */
-function sendButtonMessage(recipientId, messageText) {
+function sendButtonMessage(recipientId, messageText, buttons) {
+  if(typeof buttons != "object" || buttons == null) {
+    return;
+  }
+  
   var messageData = {
     recipient: {
       id: recipientId
@@ -578,7 +594,7 @@ function sendButtonMessage(recipientId, messageText) {
         payload: {
           template_type: "button",
           text: (messageText && messageText != "") ? messageText : "This is a test button text",
-          buttons:[{
+         /* buttons:[{
             type: "web_url",
             url: "https://www.oculus.com/en-us/rift/",
             title: "Open Web URL"
@@ -590,7 +606,8 @@ function sendButtonMessage(recipientId, messageText) {
             type: "phone_number",
             title: "Call Phone Number",
             payload: "+16505551234"
-          }]
+          }]*/
+          buttons: buttons
         }
       }
     }
