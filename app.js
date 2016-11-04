@@ -88,7 +88,10 @@ app.get('/webhook', function(req, res) {
  */
 app.post('/webhook', function (req, res) {
   var data = req.body;
-/*
+  console.log(data);
+  
+  
+
   // Make sure this is a page subscription
   if (data.object == 'page') {
     // Iterate over each entry
@@ -116,7 +119,7 @@ app.post('/webhook', function (req, res) {
         }
       });
     });
-*/
+
     // Assume all went well.
     //
     // You must send back a 200, within 20 seconds, to let us know you've 
