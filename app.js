@@ -356,16 +356,15 @@ function receivedMessage(event) {
 		    case 'Change 1st caregiver':
 		      sendButtonMessage(senderID, "I am sorry that you are experiencing issues with the ending  calls feature.  Is this happening  when:", 
 		      [{
-            attachment:{
-            type:"template",
-            payload: {
-                url: SERVER_URL + "/assets/Factory Reset Gizmo.pdf"
-              }
-          } 
+            type:"web_url",
+            url: SERVER_URL + "/assets/Factory Reset Gizmo.pdf",
+            title:"Yes, Please send me reset instructions?",
+            webview_height_ratio: "compact"
           }, {
-            type: 'web_url',
-            title: 'No, I just want to change other contacts on the gizmo.',
-            payload: '',  
+            type:"web_url",
+            url: SERVER_URL + "/assets/iAdding or Removing Caregivers.pdf",
+            title:"No, I just want to change other contacts on the gizmo.",
+            webview_height_ratio: "compact" 
           }])
           
           /*attachment: {
