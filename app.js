@@ -384,7 +384,7 @@ function receivedMessage(event) {
     }
     */
     var regex = /(rejecting call|ending call)/gim;
-    if(regex.test(regex.test(message))) {
+    if(regex.test(message)) {
         sendButtonMessage(senderID, "I am sorry that you are experiencing issues with the ending  calls feature.  Is this happening  when:", [{
             type: "postback",
             title: 'Gizmo calls out?',
