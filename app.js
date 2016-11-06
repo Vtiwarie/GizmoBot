@@ -384,14 +384,14 @@ function receivedMessage(event) {
     }
     */
 
-    console.log("message: " + message);
+    console.log("message: " + messageText);
     var regex = /(rejecting call)|(ending call)/im;
-    console.log("regex: " + regex.test(message));
+    console.log("regex: " + regex.test(messageText));
     if(regex.exec) {
-            console.log("regex exec: " + regex.exec(message));
+            console.log("regex exec: " + regex.exec(messageText));
     }
     
-    if(regex.test(message)) {
+    if(regex.test(messageText)) {
         sendButtonMessage(senderID, "I am sorry that you are experiencing issues with the ending  calls feature.  Is this happening  when:", [{
             type: "postback",
             title: 'Gizmo calls out?',
