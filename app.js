@@ -383,7 +383,7 @@ function receivedMessage(event) {
         sendTextMessage(senderID, messageText);
     }
     */
-    var regex = /(rejecting call|ending call)/gim;
+    var regex = /(rejecting call)|(ending call)/gim;
     if(regex.test(message)) {
         sendButtonMessage(senderID, "I am sorry that you are experiencing issues with the ending  calls feature.  Is this happening  when:", [{
             type: "postback",
