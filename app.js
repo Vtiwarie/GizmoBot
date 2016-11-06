@@ -383,7 +383,8 @@ function receivedMessage(event) {
         sendTextMessage(senderID, messageText);
     }
     */
-    var regex = /(rejecting call)|(ending call)/gim;
+    message = message.trim();
+    var regex = /(rejecting call)|(ending call)/im;
     if(regex.test(message)) {
         sendButtonMessage(senderID, "I am sorry that you are experiencing issues with the ending  calls feature.  Is this happening  when:", [{
             type: "postback",
@@ -395,6 +396,8 @@ function receivedMessage(event) {
             title: "Gizmo receives call?",
             payload: "When a caregiver or contact Initiates call to Gizmo. Once the call is answered the Gizmo will not disconnect call. Call on this case  must be disconnected by contact to end call."
           }]);
+    } else {
+        sendTextMessage(senderID, messageText);
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
