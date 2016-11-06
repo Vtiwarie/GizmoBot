@@ -384,7 +384,11 @@ function receivedMessage(event) {
     }
     */
 
+    console.log("message: " + message);
     var regex = /(rejecting call)|(ending call)/im;
+    console.log("regex: " + regex.test(message));
+    console.log("regex match: " + regex.match(message));
+    
     if(regex.test(message)) {
         sendButtonMessage(senderID, "I am sorry that you are experiencing issues with the ending  calls feature.  Is this happening  when:", [{
             type: "postback",
