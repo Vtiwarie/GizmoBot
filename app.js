@@ -259,7 +259,7 @@ function receivedMessage(event) {
   }
 
   if (messageText) {
-
+/*
     // If we receive a text message, check to see if it matches any special
     // keywords and send back the corresponding example. Otherwise, just echo
     // the text we received.
@@ -381,6 +381,20 @@ function receivedMessage(event) {
 
       default:
         sendTextMessage(senderID, messageText);
+    }
+    */
+    
+    if(message.match(/(ending call)|(rejecting call)/ig)) {
+        sendButtonMessage(senderID, "I am sorry that you are experiencing issues with the ending  calls feature.  Is this happening  when:", [{
+            type: "postback",
+            title: 'Gizmo calls out?',
+            payload: "As long as the gizmo initiates the call to a caregiver of contact, it can hang up on the user."
+
+          }, {
+            type: "postback",
+            title: "Gizmo receives call?",
+            payload: "When a caregiver or contact Initiates call to Gizmo. Once the call is answered the Gizmo will not disconnect call. Call on this case  must be disconnected by contact to end call."
+          }]);
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
