@@ -388,10 +388,10 @@ function receivedMessage(event) {
     var regex = /(rejecting call)|(ending call)/im;
     console.log("regex: " + regex.test(messageText));
     if(regex.exec) {
-            console.log("regex exec: " + regex.exec(messageText));
+        console.log("regex exec: " + regex.exec(messageText));
     }
     
-    if(regex.test(messageText)) {
+    if(checkRegex(regex, messageText)) {
         sendButtonMessage(senderID, "I am sorry that you are experiencing issues with the ending  calls feature.  Is this happening  when:", [{
             type: "postback",
             title: 'Gizmo calls out?',
@@ -402,12 +402,63 @@ function receivedMessage(event) {
             title: "Gizmo receives call?",
             payload: "When a caregiver or contact Initiates call to Gizmo. Once the call is answered the Gizmo will not disconnect call. Call on this case  must be disconnected by contact to end call."
           }]);
+    } else if(false) {
+        /*	case 'Change primary caregiver':
+		  case 'Change caregiver':
+		    case 'Change 1st caregiver':
+		      sendButtonMessage(senderID, "Great! I can help you with your request to change primary caregiver. To change primary caregivers the gizmo will need to be reset. Before we proceed please be aware that this will require linking to the gizmo and adding all contacts & settings as if it were a  new gizmo. ", 
+		      [{
+            type:"web_url",
+            url: SERVER_URL + "/assets/Factory Reset Gizmo.pdf",
+            title:"Yes, Please send me reset instructions?",
+            webview_height_ratio: "compact"
+          }, {
+            type:"web_url",
+            url: SERVER_URL + "/assets/Adding or Removing Caregivers.pdf",
+            title:"No, I just want to change other contacts on the gizmo.",
+            webview_height_ratio: "compact" 
+          }])*/
     } else {
-        sendTextMessage(senderID, messageText);
+        sendTextMessage(senderID, "I didn't get that. Please rephrase.");
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
   }
+}
+
+function log() {
+    //TODO
+}
+
+function checkRegex (regex, txt) {
+    debugFunc(arguments.callee.name, this.arguments.parameters);
+
+    if(regex && txt && (regex instanceof RegExp) && txt != '') {
+        return regex.test(txt);
+    } else {
+        errorMsg(arguments.callee.name, 'Could not test regex.');
+        return false;
+    }
+}
+
+function errorMsg(funcName, errMsg) {
+    if(funcName && typeof funcName == 'string' && errMsg && typeof errMsg == 'string') {
+        console.log('ERROR [' + funcName + ']: ' + errMsg);
+    } else {
+        console.log('ERROR: [No message]');
+    }
+}
+
+
+function debugFunc(funcName, params) {
+    if(funcName && params && funcName != '') {
+        console.log('Debugging function ' + funcName + ':');
+        for(i in params) {
+            console.log('param ' + i + ' Type: ' + typeof params[i] + ' Val: ' + params[i]);
+        }
+    } else {
+        console.log("Could not debug function.");
+    }
 }
 
 
