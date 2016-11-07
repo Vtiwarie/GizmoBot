@@ -433,7 +433,7 @@ function log() {
 }
 
 function checkRegex (regex, txt) {
-    debugFunc(arguments.callee.name, this.arguments.parameters);
+    debugFunc(arguments.name, arguments);
 
     if(regex && txt && (regex instanceof RegExp) && txt != '') {
         return regex.test(txt);
