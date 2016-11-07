@@ -387,7 +387,7 @@ function receivedMessage(event) {
     */
 
     console.log("message: " + messageText);
-    var regex = /(rejecting call)|(ending call)/im;
+    var regex = /((reject)|(end)(ing)*\s*call)/im;
     console.log("regex: " + regex.test(messageText));
     if(regex.exec) {
         console.log("regex exec: " + regex.exec(messageText));
