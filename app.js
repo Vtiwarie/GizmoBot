@@ -465,9 +465,9 @@ function checkRegex (regex, txt) {
 
 function debugFunc(func) {
     if(!func || typeof func != 'function') {
-        log(func ' is not a function', arguments.callee.name);
+        log(func + ' is not a function', arguments.callee.name);
     } else {
-        for(int i=0; i<arguments.length; i++) {
+        for(var i=0; i<arguments.length; i++) {
             log('Param ' + i + ' Type: ' + typeof arguments[i] + ' Val: ' + arguments[i] + "\n", func.arguments.callee.name);
         }
     } 
