@@ -398,7 +398,7 @@ function receivedMessage(event) {
             title: "Gizmo receives call?",
             payload: "When a caregiver or contact Initiates call to Gizmo. Once the call is answered the Gizmo will not disconnect call. Call on this case  must be disconnected by contact to end call."
           }]);
-    } else if(checkRegex(/(\bc\w*h\w*a\w*n\w*g).*(\bc\w*a\w*r\w*e)*.*(\bg\w*i\w*v\w*e\w*r)/im, messageText)) {
+    } else if(checkRegex(/(\bc\w*h\w*a\w*n\w*g).*(\bc\w*a\w*r\w*e*(\w|\s)*g\w*i\w*v\w*e\w*r)/im, messageText)) {
          sendButtonMessage(senderID, "Great! I can help you with your request to change primary caregiver. To change primary caregivers the gizmo will need to be reset. Before we proceed please be aware that this will require linking to the gizmo and adding all contacts & settings as if it were a  new gizmo. ", 
 		      [{
             type:"web_url",
