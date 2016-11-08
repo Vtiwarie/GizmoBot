@@ -468,7 +468,7 @@ function debugFunc(func) {
         log(func + ' is not a function', arguments.callee.name);
     } else {
         for(var i=0; i<arguments.length; i++) {
-            log('Param ' + i + ' Type: ' + typeof arguments[i] + ' Val: ' + arguments[i] + "\n", func.arguments.callee.name);
+            log('Param: ' + i + "\nType: " + typeof func.arguments[i] + "\nVal: " + func.arguments[i], func.arguments.callee.name);
         }
     } 
 }
