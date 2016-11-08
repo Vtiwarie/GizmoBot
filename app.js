@@ -442,11 +442,12 @@ function log(msg, funcName) {
     if(!msg || msg.length < 1 || msg == '') {
         console.log('Could not report log');
     }
-    
+    var logText = "--------LOG-------\n";
+    var funcLogText = "--------" + funcName + "-------\n";
     if(funcName && funcName.length>0 && funcName != '') {
-         console.log('Calling: ' + funcName + "\nLog: " + msg);
+         console.log(funcLogText + msg);
     } else {
-        console.log('Log: ' + msg);
+        console.log(logText + msg);
     }
     return;
    
