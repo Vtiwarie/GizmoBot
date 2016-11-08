@@ -429,38 +429,38 @@ function receivedMessage(event) {
 
     } else if(checkRegex(/\bp.*l.*e.*a.*s.*e\b.*\ba.*n.*s.*w.*e.*r\b/, messageText)) {
         
-    }
-    else {
+    } else {
         sendTextMessage(senderID, "I didn't get that. Please rephrase.");
     }
+    
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
   }
 }
 
-function log() {
-    //TODO
+function log(msg, funcName) {
+    if(!msg || msg.length < 1 || msg == '') {
+        console.log('Could not report log');
+    }
+    
+    if(funcName && funcName.length>0 && funcName != '') {
+         console.log('Calling: ' + funcName + "\nLog: msg");
+    } else {
+        console.log('Log: ' + msg);
+    }
+   
 }
 
 function checkRegex (regex, txt) {
-    debugFunc(arguments.name, arguments);
+    debugFunc(this.name, this.arguments);
 
     if(regex && txt && (regex instanceof RegExp) && txt != '') {
         return regex.test(txt);
     } else {
-        errorMsg(arguments.callee.name, 'Could not test regex.');
+        errorMsg(this.name, 'Could not test regex.');
         return false;
     }
 }
-
-function errorMsg(funcName, errMsg) {
-    if(funcName && typeof funcName == 'string' && errMsg && typeof errMsg == 'string') {
-        console.log('ERROR [' + funcName + ']: ' + errMsg);
-    } else {
-        console.log('ERROR: [No message]');
-    }
-}
-
 
 function debugFunc(funcName, params) {
     if(funcName && params && funcName != '') {
@@ -470,6 +470,15 @@ function debugFunc(funcName, params) {
         }
     } else {
         console.log("Could not debug function.");
+    }
+}
+
+
+function errorMsg(funcName, errMsg) {
+    if(funcName && typeof funcName == 'string' && errMsg && typeof errMsg == 'string') {
+        console.log('ERROR [' + funcName + ']: ' + errMsg);
+    } else {
+        console.log('ERROR: [No message]');
     }
 }
 
@@ -959,6 +968,7 @@ function sendAccountLinking(recipientId) {
  *
  */
 function callSendAPI(messageData) {
+  log("Calling: " + this.name);
   request({
     uri: 'https://graph.facebook.com/v2.6/me/messages',
     qs: { access_token: PAGE_ACCESS_TOKEN },
