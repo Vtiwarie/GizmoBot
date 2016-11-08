@@ -411,7 +411,7 @@ function receivedMessage(event) {
             title:"No, I just want to change other contacts on the gizmo.",
             webview_height_ratio: "compact" 
           }]);
-    } else if(checkRegex(/\bR.*e.*g.*i.*s.*t.*e.*r\b.*\bG.*i.*z.*m.*o\b/im, messageText) || checkRegex(/\bP.*a.*i.*r\b/im, messageText) || checkRegex(/\bL.*i.*n.*k\b/im, messageText)) {
+    } else if(checkRegex(/\s+R.*e.*g.*i.*s.*t.*e.*r\b.*\s+.G.*i.*z.*m.*o\b/im, messageText) || checkRegex(/\s+P.*a.*i.*r\b/im, messageText) || checkRegex(/\s+*L.*i.*n.*k\b/im, messageText)) {
 
         sendButtonMessage(senderID, "Great! I can help you with your request to link with the gizmo. First to better provide instructions are you trying to pair with:", 
 		      [{
