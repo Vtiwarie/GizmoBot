@@ -425,11 +425,11 @@ function receivedMessage(event) {
             title:"iPhone",
             webview_height_ratio: "compact" 
           }]);
-    } else if(checkRegex(/\bh.*a|u.*n.*g\b.*\bu.*p\b/im, messageText)) {
+    } /*else if(checkRegex(/\bh.*a|u.*n.*g\b.*\bu.*p\b/im, messageText)) {
 
     } else if(checkRegex(/\bp.*l.*e.*a.*s.*e\b.*\ba.*n.*s.*w.*e.*r\b/, messageText)) {
         
-    } else {
+    }*/ else {
         sendTextMessage(senderID, "I didn't get that. Please rephrase.");
     }
     
@@ -470,7 +470,7 @@ function debugFunc(func) {
     } else {
         var msg = '';
         for(var i=0; i<func.arguments.length; i++) {
-            msg += 'Param: ' + i + "\nType: " + typeof func.arguments[i] + "\nVal: " + func.arguments[i] + "\n";
+            msg += 'Param: ' + i + "\nParam Type: " + typeof func.arguments[i] + "\nVal: " + func.arguments[i] + "\n";
         }
         log(msg, func.arguments.callee.name);
     } 
