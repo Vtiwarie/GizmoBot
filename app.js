@@ -453,11 +453,8 @@ function log(msg, funcName) {
 }
 
 function checkRegex (regex, txt) {
-    debugFunc(this);
-    log(typeof this);
-        log(this instanceof function);
-
-
+    debugFunc(arguments.callee);
+ 
     if(regex && txt && (regex instanceof RegExp) && txt != '') {
         return regex.test(txt);
     } else {
