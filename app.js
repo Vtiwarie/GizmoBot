@@ -444,15 +444,16 @@ function log(msg, funcName) {
     }
     
     if(funcName && funcName.length>0 && funcName != '') {
-         console.log('Calling: ' + funcName + "\nLog: msg");
+         console.log('Calling: ' + funcName + "\nLog: " + msg);
     } else {
         console.log('Log: ' + msg);
     }
+    return;
    
 }
 
 function checkRegex (regex, txt) {
-    debugFunc(this.name, this.arguments);
+    debugFunc(this);
 
     if(regex && txt && (regex instanceof RegExp) && txt != '') {
         return regex.test(txt);
@@ -462,18 +463,16 @@ function checkRegex (regex, txt) {
     }
 }
 
-function debugFunc(funcName, params) {
-    if(funcName && params && funcName != '') {
-        console.log('Debugging function ' + funcName + ':');
-        for(i in params) {
-            console.log('param ' + i + ' Type: ' + typeof params[i] + ' Val: ' + params[i]);
-        }
+function debugFunc(func) {
+    if(!func || typeof func != 'function') {
+        log(func ' is not a function', arguments.callee.name);
     } else {
-        console.log("Could not debug function.");
-    }
+        for(int i=0; i<arguments.length; i++) {
+            log('Param ' + i + ' Type: ' + typeof arguments[i] + ' Val: ' + arguments[i] + "\n", func.arguments.callee.name);
+        }
+    } 
 }
-
-
+        
 function errorMsg(funcName, errMsg) {
     if(funcName && typeof funcName == 'string' && errMsg && typeof errMsg == 'string') {
         console.log('ERROR [' + funcName + ']: ' + errMsg);
