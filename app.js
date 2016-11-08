@@ -416,7 +416,7 @@ function receivedMessage(event) {
         sendButtonMessage(senderID, "Great! I can help you with your request to link with the gizmo. First to better provide instructions are you trying to pair with:", 
 		      [{
             type:"web_url",
-            url: SERVER_URL + "/Android - Adding A Gizmo.pdf",
+            url: SERVER_URL + "/assets/Android - Adding A Gizmo.pdf",
             title:"Android",
             webview_height_ratio: "compact"
           }, {
