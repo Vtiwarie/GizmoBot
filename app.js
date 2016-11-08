@@ -386,14 +386,8 @@ function receivedMessage(event) {
     }
     */
 
-    console.log("message: " + messageText);
-    var regex = /((reject)|(end)(ing)*\s*call)/im;
-    console.log("regex: " + regex.test(messageText));
-    if(regex.exec) {
-        console.log("regex exec: " + regex.exec(messageText));
-    }
     
-    if(checkRegex(regex, messageText)) {
+    if(checkRegex(/((\br.*e.*j.*e.*c.*t)|(\be.*n.*d))+.*\bcall/im, messageText)) {
         sendButtonMessage(senderID, "I am sorry that you are experiencing issues with the ending  calls feature.  Is this happening  when:", [{
             type: "postback",
             title: 'Gizmo calls out?',
@@ -404,11 +398,9 @@ function receivedMessage(event) {
             title: "Gizmo receives call?",
             payload: "When a caregiver or contact Initiates call to Gizmo. Once the call is answered the Gizmo will not disconnect call. Call on this case  must be disconnected by contact to end call."
           }]);
-    } else if(false) {
-        /*	case 'Change primary caregiver':
-		  case 'Change caregiver':
-		    case 'Change 1st caregiver':
-		      sendButtonMessage(senderID, "Great! I can help you with your request to change primary caregiver. To change primary caregivers the gizmo will need to be reset. Before we proceed please be aware that this will require linking to the gizmo and adding all contacts & settings as if it were a  new gizmo. ", 
+    } else if(checkRegex(/(\bc.*h.*a.*n.*g.*).*(\bc.*a.*r.*e)*.*(\bg.*i.*v.*e.*r)/im)) {
+  
+         sendButtonMessage(senderID, "Great! I can help you with your request to change primary caregiver. To change primary caregivers the gizmo will need to be reset. Before we proceed please be aware that this will require linking to the gizmo and adding all contacts & settings as if it were a  new gizmo. ", 
 		      [{
             type:"web_url",
             url: SERVER_URL + "/assets/Factory Reset Gizmo.pdf",
@@ -419,7 +411,7 @@ function receivedMessage(event) {
             url: SERVER_URL + "/assets/Adding or Removing Caregivers.pdf",
             title:"No, I just want to change other contacts on the gizmo.",
             webview_height_ratio: "compact" 
-          }])*/
+          }]);
     } else {
         sendTextMessage(senderID, "I didn't get that. Please rephrase.");
     }
