@@ -387,7 +387,7 @@ function receivedMessage(event) {
     */
 
     
-    if(checkRegex(/((\br.*e.*j.*e.*c.*t)|(\be.*n.*d))+.*\bcall/im, messageText)) {
+    if(checkRegex(/((\br.*e.*j.*e.*c.*t\b)|(\be.*n.*d\b))+.*\bcall/im, messageText)) {
         sendButtonMessage(senderID, "I am sorry that you are experiencing issues with the ending  calls feature.  Is this happening  when:", [{
             type: "postback",
             title: 'Gizmo calls out?',
@@ -398,8 +398,7 @@ function receivedMessage(event) {
             title: "Gizmo receives call?",
             payload: "When a caregiver or contact Initiates call to Gizmo. Once the call is answered the Gizmo will not disconnect call. Call on this case  must be disconnected by contact to end call."
           }]);
-    } else if(checkRegex(/(\bc.*h.*a.*n.*g.*).*(\bc.*a.*r.*e)*.*(g.*i.*v.*e.*r)/im, messageText)) {
-  
+    } else if(checkRegex(/(\bc.*h.*a.*n.*g.*\b).*(\bc.*a.*r.*e\b)*.*(\bg.*i.*v.*e.*r\b)/im, messageText)) {
          sendButtonMessage(senderID, "Great! I can help you with your request to change primary caregiver. To change primary caregivers the gizmo will need to be reset. Before we proceed please be aware that this will require linking to the gizmo and adding all contacts & settings as if it were a  new gizmo. ", 
 		      [{
             type:"web_url",
@@ -412,7 +411,26 @@ function receivedMessage(event) {
             title:"No, I just want to change other contacts on the gizmo.",
             webview_height_ratio: "compact" 
           }]);
-    } else {
+    } else if(checkRegex(/\bR.*e.*g.*i.*s.*t.*e.*r\b.*\bG.*i.*z.*m.*o\b/im, messageText) || checkRegex(/\bP.*a.*i.*r\b/im, messageText) || checkRegex(/\bL.*i.*n.*k\b/im, messageText)) {
+
+        sendButtonMessage(senderID, "Great! I can help you with your request to link with the gizmo. First to better provide instructions are you trying to pair with:", 
+		      [{
+            type:"web_url",
+            url: SERVER_URL + "/assets/Factory Reset Gizmo.pdf",
+            title:"Android",
+            webview_height_ratio: "compact"
+          }, {
+            type:"web_url",
+            url: SERVER_URL + "/assets/Adding or Removing Caregivers.pdf",
+            title:"iPhone",
+            webview_height_ratio: "compact" 
+          }]);
+    } else if(checkRegex(/\bh.*a|u.*n.*g\b.*\bu.*p\b/im, messageText)) {
+
+    } else if(checkRegex(/\bp.*l.*e.*a.*s.*e\b.*\ba.*n.*s.*w.*e.*r\b/, messageText)) {
+        
+    }
+    else {
         sendTextMessage(senderID, "I didn't get that. Please rephrase.");
     }
   } else if (messageAttachments) {
