@@ -498,11 +498,12 @@ function Slider() {
 
 
 function log(msg, func) {
+    var logText = "--------LOG-------\n";
+
     if(!msg || msg.length < 1 || msg == '') {
-        console.log('Could not report log');
+        console.log(logText + 'Could not report log');
         return;
     }
-    var logText = "--------LOG-------\n";
     var funcName = (!func || !func.arguments || !func.arguments.callee) ? '': func.arguments.callee.name;
     var funcLogText = "--------" + funcName + "-------\n";
     if(funcName && funcName.length>0 && typeof funcName == 'string' && funcName != '') {
@@ -510,6 +511,7 @@ function log(msg, func) {
     } else {
         console.log(logText + msg);
     }
+    console.log('-----------------');
     return;
    
 }
