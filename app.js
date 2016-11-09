@@ -457,6 +457,7 @@ function Node() {
 }
 
 function TextNode(text) {
+    var mText;
     
     TextNode.prototype.constructor = function(text) {
         Node.call(this);
