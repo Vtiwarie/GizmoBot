@@ -460,7 +460,7 @@ function TextNode(text) {
     this.mText = (text && typeof text == 'string' && text.length>0) ? text : '';
     
     TextNode.prototype.testText = function() {
-        debugFunc('Testing: ' + this.mText, arguments.callee);
+        debugFunc('Testing: ' + this.mText, this);
     }
 
 }
@@ -513,7 +513,7 @@ function checkRegex (regex, txt) {
 
 function debugFunc(func) {
     if(!func || typeof func != 'function') {
-        log(func + ' is not a function', arguments.callee.name);
+        log('Could not detect function');
     } else {
         var msg = '';
         for(var i=0; i<func.arguments.length; i++) {
