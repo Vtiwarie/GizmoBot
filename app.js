@@ -404,6 +404,7 @@ app.post('/webhook', function (req, res) {
   var data = req.body;
   console.log(req);
   var node = new TextNode('my test text');
+  node.test();
   node.testText();
   
   
@@ -457,10 +458,10 @@ function Node() {
 }
 
 function TextNode(text) {
+    Node.call(this);
     this.mText = (text && typeof text == 'string' && text.length>0) ? text : '';
 
     TextNode.prototype.constructor = function(text) {
-        Node.call(this);
         debugFunc(arguments.callee);
         this.mText = (text && typeof text == 'string' && text.length>0) ? text : '';
     }
