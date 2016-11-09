@@ -91,8 +91,8 @@ app.get('/webhook', function(req, res) {
 app.post('/webhook', function (req, res) {
   var data = req.body;
   console.log(req);
-  var node = new Node("blah node");
-  node.test();
+  var node = new TextNode();
+  node.testText('My text');
   
   
 
@@ -445,8 +445,7 @@ function receivedMessage(event) {
 }
 
 //Node class
-function Node(text) {
-    this.mText = text;
+function Node() {
     if(this.constructor == Node) {
         throw new Error('Cannot instantiate abstract Node class');
     }
@@ -454,10 +453,26 @@ function Node(text) {
     Node.Prototype.test = function() {
         debugFunc(arguments.callee);
     }
+    
+    
 }
 
-function TextNode() {
+function TextNode(text) {
+    Node.call(this);
+    this.mText = (text && typeof text == 'string' && text.length>0) ? text : '';
     
+    TextNode.Prototype.testText = function() {
+        debugFunc('Testing: ' + mText, arguments.callee);
+    }
+
+}
+
+function ButtonNode() {
+    ButtonNode.Prototype.setButtons(arrButtons) = function() {
+        if( !(arrButtons instanceof Array)) {
+            
+        }
+    }
 }
 
 function Slider() {
@@ -475,7 +490,7 @@ function log(msg, func) {
     var logText = "--------LOG-------\n";
     var funcName = (func !== undefined && func !== null) ? func.arguments.callee.name : '';
     var funcLogText = "--------" + funcName + "-------\n";
-    if(funcName && funcName.length>0 && funcName != '') {
+    if(funcName && funcName.length>0 && typeof funcName == 'string' && funcName != '') {
          console.log(funcLogText + msg);
     } else {
         console.log(logText + msg);
