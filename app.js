@@ -517,9 +517,14 @@ function debugFunc(func) {
         log('Could not detect function');
     } else {
         var msg = '';
-        for(var i=0; i<func.arguments.length; i++) {
-            msg += 'Param: ' + i + "\nParam Type: " + typeof func.arguments[i] + "\nVal: " + func.arguments[i] + "\n";
+        if(arguments.length < 1) {
+            msg = 'No parameters provided';
+        } else {
+            for(var i=0; i<func.arguments.length; i++) {
+                msg += 'Param: ' + i + "\nParam Type: " + typeof func.arguments[i] + "\nVal: " + func.arguments[i] + "\n";
+            }
         }
+        
         log(msg, func.arguments.callee.name);
     } 
 }
