@@ -460,7 +460,7 @@ function TextNode(text) {
     this.mText = (text && typeof text == 'string' && text.length>0) ? text : '';
     
     TextNode.prototype.testText = function() {
-        debugFunc('Testing: ' + this.mText, this);
+        debugFunc(this);
     }
 
 }
@@ -501,7 +501,7 @@ function log(msg, func) {
 }
 
 function checkRegex (regex, txt) {
-    debugFunc(arguments.callee);
+  //  debugFunc(arguments.callee);
  
     if(regex && txt && (regex instanceof RegExp) && txt != '') {
         return regex.test(txt);
@@ -512,7 +512,7 @@ function checkRegex (regex, txt) {
 }
 
 function debugFunc(func) {
-    if(!func || typeof func != 'function') {
+    if(!func || typeof func != 'object' || !func.arguments || !func.arguments.callee || typeof func.arguments.callee != 'function') {
         log('Could not detect function');
     } else {
         var msg = '';
