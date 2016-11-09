@@ -450,11 +450,9 @@ function Node() {
         throw new Error('Cannot instantiate abstract Node class');
     }
     
-    Node.Prototype.test = function() {
+    Node.prototype.test = function() {
         debugFunc(arguments.callee);
     }
-    
-    
 }
 
 function TextNode(text) {
@@ -469,6 +467,7 @@ function TextNode(text) {
 TextNode.prototype = Object.create(Node.prototype);
 TextNode.prototype.constructor = TextNode;
 
+/*
 function ButtonNode() {
     ButtonNode.Prototype.setButtons(arrButtons) = function() {
         if( !(arrButtons instanceof Array)) {
@@ -476,7 +475,7 @@ function ButtonNode() {
         }
     }
 }
-
+*/
 function Slider() {
     
 }
