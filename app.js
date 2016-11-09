@@ -451,7 +451,7 @@ function Node(text) {
         throw new Error('Cannot instantiate abstract Node class');
     }
     
-    Node.Prototype.test() {
+    Node.Prototype.test = function() {
         debugFunc(arguments.callee);
     }
 }
