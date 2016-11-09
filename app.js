@@ -461,11 +461,13 @@ function TextNode(text) {
     Node.call(this);
     this.mText = (text && typeof text == 'string' && text.length>0) ? text : '';
     
-    TextNode.Prototype.testText = function() {
+    TextNode.prototype.testText = function() {
         debugFunc('Testing: ' + mText, arguments.callee);
     }
 
 }
+TextNode.prototype = Object.create(Node.prototype);
+TextNode.prototype.constructor = TextNode;
 
 function ButtonNode() {
     ButtonNode.Prototype.setButtons(arrButtons) = function() {
