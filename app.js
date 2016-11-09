@@ -457,8 +457,8 @@ function Node() {
 }
 
 function TextNode(text) {
-    var mText;
-    
+    this.mText = (text && typeof text == 'string' && text.length>0) ? text : '';
+
     TextNode.prototype.constructor = function(text) {
         Node.call(this);
         debugFunc(arguments.callee);
