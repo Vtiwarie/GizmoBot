@@ -499,12 +499,11 @@ function Slider() {
 
 function log(msg, func) {
     var logText = "--------LOG-------\n";
-console.log(typeof msg + ' : ' + msg);
     if(!msg || typeof msg != 'string' || msg == '') {
         console.log(logText + 'Could not report log');
         console.log('-------------------');
         return;
-    }
+    } else {
     var funcName = (!func || !func.arguments || !func.arguments.callee) ? '': func.arguments.callee.name;
     var funcLogText = "--------" + funcName + "-------\n";
     if(funcName && typeof funcName == 'string' && funcName.length>0 && funcName != '') {
@@ -512,9 +511,9 @@ console.log(typeof msg + ' : ' + msg);
     } else {
         console.log(logText + msg);
     }
-    console.log('-------------------');
-    return;
-   
+     console.log('-------------------');
+    }
+     return;
 }
 
 function checkRegex (regex, txt) {
@@ -533,7 +532,7 @@ function debugFunc(func) {
         log('Could not detect function');
     } else {
         var msg = '';
-        if(arguments.length < 1) {
+        if(func.arguments.length < 1) {
             msg = 'No parameters provided';
         } else {
             for(var i=0; i<func.arguments.length; i++) {
