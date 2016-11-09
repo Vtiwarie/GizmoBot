@@ -453,6 +453,7 @@ function Node() {
     }
     
     Node.prototype.test = function() {
+        log('Running Node.test()');
         debugFunc(arguments.callee);
     }
 }
@@ -504,6 +505,7 @@ function Slider() {
 function log(msg, func) {
     if(!msg || msg.length < 1 || msg == '') {
         console.log('Could not report log');
+        return;
     }
     var logText = "--------LOG-------\n";
     var funcName = (!func || !func.arguments || !func.arguments.callee) ? '': func.arguments.callee.name;
