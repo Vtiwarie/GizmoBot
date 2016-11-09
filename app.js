@@ -460,7 +460,7 @@ function TextNode(text) {
     this.mText = (text && typeof text == 'string' && text.length>0) ? text : '';
     
     TextNode.prototype.testText = function() {
-        debugFunc('Testing: ' + mText, arguments.callee);
+        debugFunc('Testing: ' + this.mText, arguments.callee);
     }
 
 }
