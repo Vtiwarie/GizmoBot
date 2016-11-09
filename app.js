@@ -454,7 +454,6 @@ function Node() {
     
     Node.prototype.test = function() {
         log('Running Node.test()');
-        debugFunc(arguments.callee);
     }
 }
 
@@ -502,7 +501,6 @@ function log(msg, func) {
     if(!msg || typeof msg != 'string' || msg == '') {
         console.log(logText + 'Could not report log');
         console.log('-------------------');
-        return;
     } else {
     var funcName = (!func || !func.arguments || !func.arguments.callee) ? '': func.arguments.callee.name;
     var funcLogText = "--------" + funcName + "-------\n";
@@ -511,15 +509,13 @@ function log(msg, func) {
     } else {
         console.log(logText + msg);
     }
-     console.log('-------------------');
+      console.log('-------------------');
       return;
 
     }
 }
 
 function checkRegex (regex, txt) {
-  //  debugFunc(arguments.callee);
- 
     if(regex && txt && (regex instanceof RegExp) && txt != '') {
         return regex.test(txt);
     } else {
