@@ -499,14 +499,14 @@ function Slider() {
 
 function log(msg, func) {
     var logText = "--------LOG-------\n";
-
-    if(!msg || msg.length < 1 || msg == '') {
+console.log(typeof msg + ' : ' + msg);
+    if(!msg || typeof msg != 'string' || msg.length < 1 || msg == '') {
         console.log(logText + 'Could not report log');
         return;
     }
     var funcName = (!func || !func.arguments || !func.arguments.callee) ? '': func.arguments.callee.name;
     var funcLogText = "--------" + funcName + "-------\n";
-    if(funcName && funcName.length>0 && typeof funcName == 'string' && funcName != '') {
+    if(funcName && typeof funcName == 'string' && funcName.length>0 && funcName != '') {
          console.log(funcLogText + msg);
     } else {
         console.log(logText + msg);
