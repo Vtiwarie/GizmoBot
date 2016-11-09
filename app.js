@@ -93,6 +93,7 @@ app.post('/webhook', function (req, res) {
   console.log(req);
   var node = new TextNode();
   node.testText('My text');
+  node.test();
   
   
 
