@@ -512,7 +512,7 @@ function checkRegex (regex, txt) {
 }
 
 function debugFunc(func) {
-    if(!func || typeof func != 'object' typeof func.arguments.callee != 'function') {
+    if(!func || typeof func != 'object' || typeof func.arguments.callee != 'function') {
         log('Could not detect function');
     } else {
         var msg = '';
