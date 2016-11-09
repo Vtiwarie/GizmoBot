@@ -489,7 +489,7 @@ function log(msg, func) {
         console.log('Could not report log');
     }
     var logText = "--------LOG-------\n";
-    var funcName = ( ! func) ? func.arguments.callee.name : '';
+    var funcName = (!func && typeof func != 'undefined' && typeof func != 'null') ? func.arguments.callee.name : '';
     var funcLogText = "--------" + funcName + "-------\n";
     if(funcName && funcName.length>0 && typeof funcName == 'string' && funcName != '') {
          console.log(funcLogText + msg);
