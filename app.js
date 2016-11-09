@@ -403,8 +403,8 @@ function receivedMessage(event) {
 app.post('/webhook', function (req, res) {
   var data = req.body;
   console.log(req);
-  var node = new TextNode();
-  node.testText('my test text');
+  var node = new TextNode('my test text'');
+  node.testText();
   
   
 
