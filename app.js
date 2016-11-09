@@ -459,7 +459,8 @@ function TextNode(text) {
     Node.call(this);
     this.mText = (text && typeof text == 'string' && text.length>0) ? text : '';
     
-    TextNode.prototype.testText = function() {
+    TextNode.prototype.testText = function() {k
+        console.log(this);
         debugFunc(this);
     }
 
