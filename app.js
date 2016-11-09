@@ -91,6 +91,8 @@ app.get('/webhook', function(req, res) {
 app.post('/webhook', function (req, res) {
   var data = req.body;
   console.log(req);
+  var node = new Node("blah node");
+  node.test();
   
   
 
@@ -425,6 +427,14 @@ function receivedMessage(event) {
             title:"iPhone",
             webview_height_ratio: "compact" 
           }]);
+    } else if(checkRegex(/(\bh\w*e\w*l\w*p\b)/im, messageText)) {
+
+        sendButtonMessage(senderID, "I can help with requests such as setting up place alerts, scheduled location checks, adding caregivers, linking to your gizmo, changing primary caregiver, activating re-placement gizmo.", 
+		  [{
+            type: "postback",
+            title:"Android",
+            webview_height_ratio: "compact"
+          }]);
     } else {
         sendTextMessage(senderID, "I didn't get that. Please rephrase.");
     }
@@ -434,11 +444,36 @@ function receivedMessage(event) {
   }
 }
 
-function log(msg, funcName) {
+//Node class
+function Node(text) {
+    this.mText = text;
+    if(this.constructor == Node) {
+        throw new Error('Cannot instantiate abstract Node class');
+    }
+    
+    Node.Prototype.test() {
+        debugFunc(arguments.callee);
+    }
+}
+
+function TextNode() {
+    
+}
+
+function Slider() {
+    
+}
+
+function Button() {
+    
+}
+
+function log(msg, func) {
     if(!msg || msg.length < 1 || msg == '') {
         console.log('Could not report log');
     }
     var logText = "--------LOG-------\n";
+    var funcName = (func !== undefined && func !== null) ? func.arguments.callee.name : '';
     var funcLogText = "--------" + funcName + "-------\n";
     if(funcName && funcName.length>0 && funcName != '') {
          console.log(funcLogText + msg);
