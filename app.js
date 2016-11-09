@@ -92,8 +92,7 @@ app.post('/webhook', function (req, res) {
   var data = req.body;
   console.log(req);
   var node = new TextNode();
-  node.testText('My text');
-  node.test();
+  node.testText();
   
   
 
@@ -445,6 +444,7 @@ function receivedMessage(event) {
   }
 }
 
+
 //Node class
 function Node() {
     if(this.constructor == Node) {
@@ -457,16 +457,33 @@ function Node() {
 }
 
 function TextNode(text) {
-    Node.call(this);
-    this.mText = (text && typeof text == 'string' && text.length>0) ? text : '';
+    
+    TextNode.prototype.constructor = function(text) {
+        Node.call(this);
+        debugFunc(arguments.callee);
+        this.mText = (text && typeof text == 'string' && text.length>0) ? text : '';
+    }
     
     TextNode.prototype.testText = function() {
-        debugFunc(arguments.callee);
+        log('mText: ' + this.mText);
     }
 
 }
 TextNode.prototype = Object.create(Node.prototype);
 TextNode.prototype.constructor = TextNode;
+
+
+function ButtonNode(arrButtons) {
+    TextNode.call(this);
+    this.arrButtons = arrButtons;
+    if(arrButtons && arrButtons instanceof Array) {
+        
+    } else {
+        ergMsg("Butto", arguments.callee);
+    }
+}
+
+
 
 /*
 function ButtonNode() {
@@ -481,9 +498,6 @@ function Slider() {
     
 }
 
-function Button() {
-    
-}
 
 function log(msg, func) {
     if(!msg || msg.length < 1 || msg == '') {
@@ -529,12 +543,8 @@ function debugFunc(func) {
     } 
 }
         
-function errorMsg(funcName, errMsg) {
-    if(funcName && typeof funcName == 'string' && errMsg && typeof errMsg == 'string') {
-        console.log('ERROR [' + funcName + ']: ' + errMsg);
-    } else {
-        console.log('ERROR: [No message]');
-    }
+function errorMsg(errMsg, func) {
+    log('[ERROR] ' + errMsg, func);
 }
 
 
