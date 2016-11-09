@@ -512,8 +512,9 @@ function log(msg, func) {
         console.log(logText + msg);
     }
      console.log('-------------------');
+      return;
+
     }
-     return;
 }
 
 function checkRegex (regex, txt) {
@@ -530,6 +531,7 @@ function checkRegex (regex, txt) {
 function debugFunc(func) {
     if(!func || !func.arguments || !func.arguments.callee || typeof func.arguments.callee != 'function') {
         log('Could not detect function');
+        return;
     } else {
         var msg = '';
         if(func.arguments.length < 1) {
@@ -541,6 +543,7 @@ function debugFunc(func) {
         }
         
         log(msg, func.arguments.callee.name);
+        return;
     } 
 }
         
