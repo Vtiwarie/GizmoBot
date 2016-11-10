@@ -386,7 +386,7 @@ function receivedMessage(event) {
          
          
      } else if(checkRegex(/\bqr_gizmo_gadget_cancel\b/im, quickReplyPayload)) {
-         sendTextMessage("Ok. If you need instructions on how to reset the gizmo in the future you can go to https://www.verizonwireless.com/support/knowledge-base-201101/")
+         sendTextMessage(senderID, "Ok. If you need instructions on how to reset the gizmo in the future you can go to https://www.verizonwireless.com/support/knowledge-base-201101/")
      }
 
     //sendTextMessage(senderID, "Quick reply tapped");
