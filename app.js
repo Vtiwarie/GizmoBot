@@ -656,36 +656,23 @@ function receivedPostback(event) {
                         "Keep in mind resetting the unit will clear all contacts and settings. Which will need to be added again.");});
          
      } else if(checkRegex(/\bpb_gizmo_calls_out\b/im, payload)) {
-         sendTextMessage(senderID, "As long as the gizmo initiates the call to a caregiver of contact, it can hang up on the user.", 
-            function(){sendButtonMessage(senderID, "I am sorry that you are experiencing issues with the ending  calls feature.  Is this happening  when:", [{
+         sendButtonMessage(senderID, "As long as the gizmo initiates the call to a caregiver of contact, it can hang up on the user.", [{
                 type: "postback",
                 title: "I'm still having Issues",
                 payload: "pb_ending_calls_still_issues"
     
-              }, {
-                type: "postback",
-                title: "Cancel",
-                payload: "pb_cancel_gizmo_end_call"
               }]);
-                
-            });
          
           
          
      } else if(checkRegex(/\bpb_gizmo_receives_call\b/im, payload)) {
-         sendTextMessage(senderID, "When a caregiver or contact Initiates call to Gizmo. Once the call is answered the Gizmo will not discon-nect call. Call on this case must be disconnected by contact to end call.", 
-            function(){sendButtonMessage(senderID, "I am sorry that you are experiencing issues with the ending  calls feature.  Is this happening  when:", [{
+         sendButtonMessage(senderID, "When a caregiver or contact Initiates call to Gizmo. Once the call is answered the Gizmo will not discon-nect call. Call on this case must be disconnected by contact to end call.", [{
                 type: "postback",
                 title: "I'm still having Issues",
                 payload: "pb_ending_calls_still_issues"
     
-              }, {
-                type: "postback",
-                title: "Cancel",
-                payload: "pb_cancel_gizmo_end_call"
               }]);
                 
-            });
      }
 
     
