@@ -401,7 +401,7 @@ function receivedMessage(event) {
                              }, 
                              function(){sendTextMessage(senderID, "From the \"Reset Gizmogadget\" screen, tap Yes to delete all saved settings and contacts.",
                                            function(){sendTextMessage(senderID, "A voice message tells the user that the GizmoPal is resetting",
-                                               function(){sendTextMessage(senderID, '/assets/Im resetting-1-sound.mp3')});
+                                               function(){sendAudioMessage(senderID, 'assets/Im resetting-1-sound.mp3')});
                                                
                                            });
                                            
