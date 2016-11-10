@@ -1020,9 +1020,7 @@ function sendQuickReply(recipientId, quick_reply_message_array, text, attachment
       quick_replies: quick_reply_message_array
     }
   };
-  if(typeof attachment != 'undefined' && typeof attachment != 'null') {
-        messageData.message.attachment = attachment;
-    }
+
 
   callSendAPI(messageData);
 }
