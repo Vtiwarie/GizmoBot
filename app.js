@@ -487,12 +487,12 @@ function receivedMessage(event) {
         sendButtonMessage(senderID, "I am sorry that you are experiencing issues with the ending  calls feature.  Is this happening  when:", [{
             type: "postback",
             title: 'Gizmo calls out?',
-            payload: "As long as the gizmo initiates the call to a caregiver of contact, it can hang up on the user."
+            payload: "pb_gizmo_calls_out"
 
           }, {
             type: "postback",
             title: "Gizmo receives call?",
-            payload: "When a caregiver or contact Initiates call to Gizmo. Once the call is answered the Gizmo will not disconnect call. Call on this case  must be disconnected by contact to end call."
+            payload: "pb_gizmo_receives_call"
           }]);
     } else if(checkRegex(/(\bc\w*h\w*a\w*n\w*g).*(\bc\w*a\w*r\w*e*(\s)*g\w*i\w*v\w*e\w*r)/im, messageText)) {
          sendButtonMessage(senderID, "Great! I can help you with your request to change primary caregiver. To change primary caregivers the gizmo will need to be reset. Before we proceed please be aware that this will require linking to the gizmo and adding all contacts & settings as if it were a  new gizmo. ", 
@@ -655,10 +655,41 @@ function receivedPostback(event) {
                         }],
                         "Keep in mind resetting the unit will clear all contacts and settings. Which will need to be added again.");});
          
+     } else if(checkRegex(/\bpb_gizmo_calls_out\b/im, payload)) {
+         sendTextMessage(senderID, "As long as the gizmo initiates the call to a caregiver of contact, it can hang up on the user.", 
+            function(){sendButtonMessage(senderID, "I am sorry that you are experiencing issues with the ending  calls feature.  Is this happening  when:", [{
+                type: "postback",
+                title: "I'm still having Issues",
+                payload: "pb_ending_calls_still_issues"
+    
+              }, {
+                type: "postback",
+                title: "Cancel",
+                payload: "pb_cancel_gizmo_end_call"
+              }]);
+                
+            });
+         
+          
+         
+     } else if(checkRegex(/\bpb_gizmo_receives_call\b/im, payload)) {
+         sendTextMessage(senderID, "When a caregiver or contact Initiates call to Gizmo. Once the call is answered the Gizmo will not discon-nect call. Call on this case must be disconnected by contact to end call.", 
+            function(){sendButtonMessage(senderID, "I am sorry that you are experiencing issues with the ending  calls feature.  Is this happening  when:", [{
+                type: "postback",
+                title: "I'm still having Issues",
+                payload: "pb_ending_calls_still_issues"
+    
+              }, {
+                type: "postback",
+                title: "Cancel",
+                payload: "pb_cancel_gizmo_end_call"
+              }]);
+                
+            });
      }
 
+    
 }
-
 /*
  * Message Read Event
  *
