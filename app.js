@@ -625,19 +625,67 @@ function receivedPostback(event) {
     
   // When a postback is called, we'll send a message back to the sender to 
   // let them know it was successful
-  sendTextMessage(senderID, (payload !== null && payload !== undefined && payload != "") ? payload : "Postback called");
+  //sendTextMessage(senderID, (payload !== null && payload !== undefined && payload != "") ? payload : "Postback called");
   
-     if(checkRegex(/Unable to Call Gizmo/im, payload)) {
-         sendButtonMessage(senderID, "I am sorry that you are experiencing issues with the ending  calls feature.  Is this happening  when:", [{
-            type: "postback",
-            title: 'Gizmo calls out?',
-            payload: "As long as the gizmo initiates the call to a caregiver of contact, it can hang up on the user."
+     if(checkRegex(/\bUnable to Call Gizmo\b/im, payload)) {
+         sendQuickReply(senderID, 
+              {
+              "content_type":"text",
+              "title":"Yes",
+              "payload":"yes_Unable to Call Gizmo"
+            },
+            {
+              "content_type":"text",
+              "title":"No",
+              "payload":"no_Unable to Call Gizmo"
+            },
+            "I’m sorry you are having difficulties calling the gizmo. In order to better assist you I do have a series of ques-tions.\nIs the Gizmo able to call you?");
 
-          }, {
-            type: "postback",
-            title: "Gizmo receives call?",
-            payload: "When a caregiver or contact Initiates call to Gizmo. Once the call is answered the Gizmo will not disconnect call. Call on this case  must be disconnected by contact to end call."
-          }]);
+     } else if(checkRegex(/\byes_Unable to Call Gizmo\b/im, payload)) {
+         sendQuickReply(senderID, 
+              {
+              "content_type":"text",
+              "title":"Yes",
+              "payload":"yes_call_connects"
+            },
+            {
+              "content_type":"text",
+              "title":"Comedy",
+              "payload":"no_call_connects"
+            },
+            "Great! If you are able to receive calls from the gizmo. Is possible that you might have an outbound caller ID Block.\nIf you dial gizmo # directly with *82 + Gizmo # does the call connect?");
+         
+     } else if(checkRegex(/\byes_call_connects\b/im, payload)) {
+         sendTextMessage(senderID,"Great! Glad you where able to call. In order to con-tinue calling gizmo you will need to dial *82 to un-block your number when dialing out.\n"
+         + "Alternatively you go to the Block and Unblock Ser-vices page in My Verizon to enabled outbound caller ID.")
+         
+     } else if(checkRegex(/\bno_call_connects\b/im, payload)) {
+         sendQuickReply(senderID, 
+              {
+              "content_type":"text",
+              "title":"When you called the gizmo did you get this message?\nWelcome to Verizon Wireless. The cellular custom-er you have called is not available at this time. Please try your call again later.”",
+              "payload":"yes_got_call_message"
+            },
+            {
+              "content_type":"text",
+              "title":"Comedy",
+              "payload":"no_got_call_message"
+            },
+            "When you called the gizmo did you get this mes-sage?\n\"Welcome to Verizon Wireless. The cellular custom-er you have called is not available at this time. Please try your call again later.\"");
+         
+     } else if(checkRegex(/\\b/im, payload)) {
+         
+         
+     } else if(checkRegex(/\\b/im, payload)) {
+         
+         
+     } else if(checkRegex(/\\b/im, payload)) {
+         
+         
+     } else if(checkRegex(/\\b/im, payload)) {
+         
+         
+     } else if(checkRegex(/\bno_Unable to Call Gizmo\b/im, payload)) {
          
      }
 
@@ -803,22 +851,6 @@ function sendTextMessage(recipientId, messageText) {
 }
 
 /*
-function sendPostBackMessage(recipientId, message) {
-      if(typeof buttons != "object" || buttons == null) {
-    return;
-  }
-  
-  var messageData = {
-    recipient: {
-      id: recipientId
-    },
-    message:message;  
-
-  callSendAPI(messageData);
-}
-*/
-
-/*
  * Send a button message using the Send API.
  *
  */
@@ -837,19 +869,6 @@ function sendButtonMessage(recipientId, messageText, buttons) {
         payload: {
           template_type: "button",
           text: (messageText && messageText != "") ? messageText : "This is a test button text",
-         /* buttons:[{
-            type: "web_url",
-            url: "https://www.oculus.com/en-us/rift/",
-            title: "Open Web URL"
-          }, {
-            type: "postback",
-            title: "Trigger Postback",
-            payload: "DEVELOPER_DEFINED_PAYLOAD"
-          }, {
-            type: "phone_number",
-            title: "Call Phone Number",
-            payload: "+16505551234"
-          }]*/
           buttons: buttons
         }
       }
@@ -984,30 +1003,22 @@ function sendReceiptMessage(recipientId) {
  * Send a message with Quick Reply buttons.
  *
  */
-function sendQuickReply(recipientId) {
+function sendQuickReply(recipientId, quick_reply_message_array, text, attachment) {
+    if(typeof attachment == 'undefined' || typeof attachment == 'null') {
+        attachment = {};
+    }
+    if(typeof text == 'undefined' || typeof text == 'null') {
+        text = '';
+    }
+    
   var messageData = {
     recipient: {
       id: recipientId
     },
     message: {
-      text: "What's your favorite movie genre?",
-      quick_replies: [
-        {
-          "content_type":"text",
-          "title":"Action",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACTION"
-        },
-        {
-          "content_type":"text",
-          "title":"Comedy",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
-        },
-        {
-          "content_type":"text",
-          "title":"Drama",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
-        }
-      ]
+      text: text,
+      attachment: attachment,
+      quick_replies: quick_reply_message_array
     }
   };
 
