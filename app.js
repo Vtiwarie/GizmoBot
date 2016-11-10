@@ -224,9 +224,6 @@ app.post('/webhook', function (req, res) {
         } else {
           console.log("Webhook received unknown messagingEvent: ", messagingEvent);
         }
-        log('MESSAGING EVENT: \n')
-        log(messagingEvent);
-        makeGreeting(messagingEvent);
       });
     });
 
