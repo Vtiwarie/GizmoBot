@@ -422,18 +422,7 @@ function receivedMessage(event) {
                     buttons: [{
                       type: "postback",
                       title: "Unable to call gizmo",
-                      payload: {
-                                  "sender":{
-                                    "id":"USER_ID"
-                                  },
-                                  "recipient":{
-                                    "id":"PAGE_ID"
-                                  },
-                                  "timestamp":new Date().getTime(),
-                                  "postback":{
-                                    "payload":"Unable to call gizmo"
-                                  }
-                      }
+                      payload: "Unable to call gizmo"
                     }, {
                       type: "postback",
                       title: "Gizmo Drops Out",
@@ -441,7 +430,7 @@ function receivedMessage(event) {
                     }, {
                       type: "postback",
                       title: "Cannot Call Out",
-                      payload: "Call Droppings",
+                      payload: "Cannot Call Out",
                     }],
                   }, {
                     title: "Unable to Link, Linking Replace-ment Gizmo, Changing Primary CareGiver, Adding Caregivers",
@@ -632,10 +621,26 @@ function receivedPostback(event) {
 
   console.log("Received postback for user %d and page %d with payload '%s' " + 
     "at %d", senderID, recipientID, payload, timeOfPostback);
-
+    
+    
   // When a postback is called, we'll send a message back to the sender to 
   // let them know it was successful
   sendTextMessage(senderID, (payload !== null && payload !== undefined && payload != "") ? payload : "Postback called");
+  
+     if(checkRegex(/Unable to Call Gizmo/im, payload)) {
+         sendButtonMessage(senderID, "I am sorry that you are experiencing issues with the ending  calls feature.  Is this happening  when:", [{
+            type: "postback",
+            title: 'Gizmo calls out?',
+            payload: "As long as the gizmo initiates the call to a caregiver of contact, it can hang up on the user."
+
+          }, {
+            type: "postback",
+            title: "Gizmo receives call?",
+            payload: "When a caregiver or contact Initiates call to Gizmo. Once the call is answered the Gizmo will not disconnect call. Call on this case  must be disconnected by contact to end call."
+          }]);
+         
+     }
+
 }
 
 /*
