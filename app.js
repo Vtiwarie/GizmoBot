@@ -395,7 +395,6 @@ function receivedMessage(event) {
                                   template_type: "generic",
                                   elements: [{
                                     image_url: SERVER_URL + "/assets/device_front_gadget_1_RESET.jpg",
-                                    title: "Quickly press the End/Back button 4 times."
                                   }]
                                 }
                               }
