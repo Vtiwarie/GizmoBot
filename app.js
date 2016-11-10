@@ -278,8 +278,55 @@ function receivedMessage(event) {
     var quickReplyPayload = quickReply.payload;
     console.log("Quick reply for message %s with payload %s",
       messageId, quickReplyPayload);
+      
+      if(checkRegex(/\byes_Unable to Call Gizmo\b/im, quickReplyPayload)) {
+         sendQuickReply(senderID, 
+              [{
+              "content_type":"text",
+              "title":"Yes",
+              "payload":"yes_call_connects"
+            },
+            {
+              "content_type":"text",
+              "title":"Comedy",
+              "payload":"no_call_connects"
+            }],
+            "Great! If you are able to receive calls from the gizmo. Is possible that you might have an outbound caller ID Block.\nIf you dial gizmo # directly with *82 + Gizmo # does the call connect?");
+     }  else if(checkRegex(/\byes_call_connects\b/im, quickReplyPayload)) {
+         sendTextMessage(senderID,"Great! Glad you where able to call. In order to con-tinue calling gizmo you will need to dial *82 to un-block your number when dialing out.\n"
+         + "Alternatively you go to the Block and Unblock Ser-vices page in My Verizon to enabled outbound caller ID.")
+         
+     } else if(checkRegex(/\bno_call_connects\b/im, quickReplyPayload)) {
+         sendQuickReply(senderID, 
+              [{
+              "content_type":"text",
+              "title":"When you called the gizmo did you get this message?\nWelcome to Verizon Wireless. The cellular custom-er you have called is not available at this time. Please try your call again later.”",
+              "payload":"yes_got_call_message"
+            },
+            {
+              "content_type":"text",
+              "title":"Comedy",
+              "payload":"no_got_call_message"
+            }],
+            "When you called the gizmo did you get this mes-sage?\n\"Welcome to Verizon Wireless. The cellular custom-er you have called is not available at this time. Please try your call again later.\"");
+         
+     } else if(checkRegex(/\\b/im, quickReplyPayload)) {
+         
+         
+     } else if(checkRegex(/\\b/im, quickReplyPayload)) {
+         
+         
+     } else if(checkRegex(/\\b/im, quickReplyPayload)) {
+         
+         
+     } else if(checkRegex(/\\b/im, quickReplyPayload)) {
+         
+         
+     } else if(checkRegex(/\bno_Unable to Call Gizmo\b/im, quickReplyPayload)) {
+         
+     }
 
-    sendTextMessage(senderID, "Quick reply tapped");
+    //sendTextMessage(senderID, "Quick reply tapped");
     return;
   }
 
@@ -641,53 +688,7 @@ function receivedPostback(event) {
             }],
             "I’m sorry you are having difficulties calling the gizmo. In order to better assist you I do have a series of ques-tions.\nIs the Gizmo able to call you?");
 
-     } else if(checkRegex(/\byes_Unable to Call Gizmo\b/im, payload)) {
-         sendQuickReply(senderID, 
-              [{
-              "content_type":"text",
-              "title":"Yes",
-              "payload":"yes_call_connects"
-            },
-            {
-              "content_type":"text",
-              "title":"Comedy",
-              "payload":"no_call_connects"
-            }],
-            "Great! If you are able to receive calls from the gizmo. Is possible that you might have an outbound caller ID Block.\nIf you dial gizmo # directly with *82 + Gizmo # does the call connect?");
-         
-     } else if(checkRegex(/\byes_call_connects\b/im, payload)) {
-         sendTextMessage(senderID,"Great! Glad you where able to call. In order to con-tinue calling gizmo you will need to dial *82 to un-block your number when dialing out.\n"
-         + "Alternatively you go to the Block and Unblock Ser-vices page in My Verizon to enabled outbound caller ID.")
-         
-     } else if(checkRegex(/\bno_call_connects\b/im, payload)) {
-         sendQuickReply(senderID, 
-              [{
-              "content_type":"text",
-              "title":"When you called the gizmo did you get this message?\nWelcome to Verizon Wireless. The cellular custom-er you have called is not available at this time. Please try your call again later.”",
-              "payload":"yes_got_call_message"
-            },
-            {
-              "content_type":"text",
-              "title":"Comedy",
-              "payload":"no_got_call_message"
-            }],
-            "When you called the gizmo did you get this mes-sage?\n\"Welcome to Verizon Wireless. The cellular custom-er you have called is not available at this time. Please try your call again later.\"");
-         
-     } else if(checkRegex(/\\b/im, payload)) {
-         
-         
-     } else if(checkRegex(/\\b/im, payload)) {
-         
-         
-     } else if(checkRegex(/\\b/im, payload)) {
-         
-         
-     } else if(checkRegex(/\\b/im, payload)) {
-         
-         
-     } else if(checkRegex(/\bno_Unable to Call Gizmo\b/im, payload)) {
-         
-     }
+     } 
 
 }
 
