@@ -359,7 +359,7 @@ function receivedMessage(event) {
                     buttons: [{
                       type: "postback",
                       title: "Select",
-                      payload: ""
+                      payload: "my payload"
                     }],
                   }, {
                     title: "Which Gizmo do you have?",
@@ -367,7 +367,7 @@ function receivedMessage(event) {
                     buttons: [{
                       type: "postback",
                       title: "Select",
-                      payload: ""
+                      payload: "my payload"
                     }],
                   }, {
                     title: "Which Gizmo do you have?",
@@ -375,7 +375,7 @@ function receivedMessage(event) {
                     buttons: [{
                       type: "postback",
                       title: "Select",
-                      payload: ""
+                      payload: "my payload"
                     }],
                   }]
                 }
