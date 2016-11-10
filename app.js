@@ -409,9 +409,60 @@ function receivedMessage(event) {
     }
     */
 
-    if(messageText == 'generic') {
-        sendGenericMessage(senderID);
-    } else
+     if(checkRegex(/(\bh\w*e\w*l\w*p\b/im, messageText)) {
+         sendGenericMessage(senderID, 
+             {
+              attachment: {
+                type: "template",
+                payload: {
+                  template_type: "generic",
+                  elements: [{
+                    title: "Unable to call gizmo, Calls Drop-pings, Gizmo cannot call Out",
+                    //subtitle: "Unable to call gizmo, Calls Drop-pings, Gizmo cannot call Out",
+                    //item_url: "https://www.oculus.com/en-us/rift/",          
+                    image_url: SERVER_URL + "/assets/Call Icon.png",
+                    buttons: [{
+                      type: "web_url",
+                      url: "https://www.oculus.com/en-us/rift/",
+                      title: "Open Web URL"
+                    }, {
+                      type: "postback",
+                      title: "Call Postback",
+                      payload: "Payload for first bubble",
+                    }],
+                  }, {
+                    title: "Unable to Link, Linking Replace-ment Gizmo, Changing Primary CareGiver, Adding Caregivers",
+                    //subtitle: "Your Hands, Now in VR",
+                    //item_url: "https://www.oculus.com/en-us/touch/",               
+                    image_url: SERVER_URL + "/assets/Registration Icon.png",
+                    buttons: [{
+                      type: "web_url",
+                      url: "https://www.oculus.com/en-us/touch/",
+                      title: "Open Web URL"
+                    }, {
+                      type: "postback",
+                      title: "Call Postback",
+                      payload: "Payload for second bubble",
+                    }]
+                  }, {
+                    title: "Setting up Place Alerts, Schedule Location Checks, To-Do List",
+                    //subtitle: "Your Hands, Now in VR",
+                    //item_url: "https://www.oculus.com/en-us/touch/",               
+                    image_url: SERVER_URL + "/assets/Gear.png",
+                    buttons: [{
+                      type: "web_url",
+                      url: "https://www.oculus.com/en-us/touch/",
+                      title: "Open Web URL"
+                    }, {
+                      type: "postback",
+                      title: "Call Postback",
+                      payload: "Payload for second bubble",
+                    }]
+                  }]
+                }
+              }
+         });
+     }
     if(checkRegex(/((\br\w*e\w*j\w*e\w*c\w*t)|(\be\w*n\w*d)).*\bcall/im, messageText)) {
         sendButtonMessage(senderID, "I am sorry that you are experiencing issues with the ending  calls feature.  Is this happening  when:", [{
             type: "postback",
@@ -760,12 +811,15 @@ function sendButtonMessage(recipientId, messageText, buttons) {
  * Send a Structured Message (Generic Message type) using the Send API.
  *
  */
-function sendGenericMessage(recipientId) {
+function sendGenericMessage(recipientId, message) {
+    if(typeof message != 'object') {
+        throw new Error('sendGenericMessage: argument must be an object');
+    }
   var messageData = {
     recipient: {
       id: recipientId
     },
-    message: {
+   /* message: {
       attachment: {
         type: "template",
         payload: {
@@ -801,7 +855,8 @@ function sendGenericMessage(recipientId) {
           }]
         }
       }
-    }
+    }*/
+    message:message
   };  
 
   callSendAPI(messageData);
