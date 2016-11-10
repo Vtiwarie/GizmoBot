@@ -384,26 +384,26 @@ function receivedMessage(event) {
          
      } else if(checkRegex(/\bqr_gizmo_gadget_proceed\b/im, quickReplyPayload)) {
          sendTextMessage(senderID, "Connect the Gizmo device to the charger or a com-puter via the USB cable.", 
-             new function(){sendTextMessage(senderID, "Ensure the device is powered on and the home screen is visible.", new function(){
-                 sendTextMessage(senderID, "Quickly press the End/Back button 4 times.", 
-                    new function(){
-                        sendGenericMessage(senderID, 
-                         {
-                          attachment: {
-                            type: "template",
-                            payload: {
-                              template_type: "generic",
-                              elements: [{
-                                image_url: SERVER_URL + "/assets/device_front_gadget_1_RESET.jpg",
-                                title: "Quickly press the End/Back button 4 times."
-                              }]
-                            }
-                          }
-                         }, 
-                         new function(){
-                               sendTextMessage(senderID, "From the \"Reset Gizmogadget\" screen, tap Yes to delete all saved settings and contacts.");
-                         });});
-                    });
+             function(){sendTextMessage(senderID, "Ensure the device is powered on and the home screen is visible.", 
+                 function(){sendTextMessage(senderID, "Quickly press the End/Back button 4 times.", 
+                        function(){
+                            sendGenericMessage(senderID, 
+                             {
+                              attachment: {
+                                type: "template",
+                                payload: {
+                                  template_type: "generic",
+                                  elements: [{
+                                    image_url: SERVER_URL + "/assets/device_front_gadget_1_RESET.jpg",
+                                    title: "Quickly press the End/Back button 4 times."
+                                  }]
+                                }
+                              }
+                             }, 
+                             function(){
+                                   sendTextMessage(senderID, "From the \"Reset Gizmogadget\" screen, tap Yes to delete all saved settings and contacts.");
+                             });});
+                        });
                  
              });
          
@@ -1097,7 +1097,7 @@ function callSendAPI(messageData, callbackFunc) {
       console.log("Successfully called Send API for recipient %s", 
         recipientId);
       }
-      if(callbackFunc && typeof callbackFunc == 'functioin') {
+      if(callbackFunc && typeof callbackFunc == 'function') {
           callbackFunc();
       }
     } else {
