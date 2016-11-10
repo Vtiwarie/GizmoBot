@@ -422,7 +422,18 @@ function receivedMessage(event) {
                     buttons: [{
                       type: "postback",
                       title: "Unable to call gizmo",
-                      payload: "Unable to Call Gizmo"
+                      payload: {
+                                  "sender":{
+                                    "id":"USER_ID"
+                                  },
+                                  "recipient":{
+                                    "id":"PAGE_ID"
+                                  },
+                                  "timestamp":new Date().getTime(),
+                                  "postback":{
+                                    "payload":"Unable to call gizmo"
+                                  }
+                      }
                     }, {
                       type: "postback",
                       title: "Gizmo Drops Out",
@@ -465,16 +476,9 @@ function receivedMessage(event) {
               }
          });
      } else if(checkRegex(/Unable to Call Gizmo/im, messageText)) {
-         sendButtonMessage(senderID, "I am sorry that you are experiencing issues with the ending  calls feature.  Is this happening  when:", [{
-            type: "postback",
-            title: 'Gizmo calls out?',
-            payload: "As long as the gizmo initiates the call to a caregiver of contact, it can hang up on the user."
-
-          }, {
-            type: "postback",
-            title: "Gizmo receives call?",
-            payload: "When a caregiver or contact Initiates call to Gizmo. Once the call is answered the Gizmo will not disconnect call. Call on this case  must be disconnected by contact to end call."
-          }]);
+         sendPostBackMessage(senderID, {
+             
+         });
          
      } else if(false) {
          
@@ -792,6 +796,22 @@ function sendTextMessage(recipientId, messageText) {
 
   callSendAPI(messageData);
 }
+
+/*
+function sendPostBackMessage(recipientId, message) {
+      if(typeof buttons != "object" || buttons == null) {
+    return;
+  }
+  
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message:message;  
+
+  callSendAPI(messageData);
+}
+*/
 
 /*
  * Send a button message using the Send API.
