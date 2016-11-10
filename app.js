@@ -643,19 +643,20 @@ function receivedPostback(event) {
             }],
             "I’m sorry you are having difficulties calling the gizmo. In order to better assist you I do have a series of ques-tions.\nIs the Gizmo able to call you?");
      } else if(checkRegex(/\bpb_gizmo_gadget\b/im, payload)) {
-         sendTextMessage(senderID, "A factory data reset may help with a blank or frozen screen, apps crashing or freezing, keypad/touchscreen problems, can't hear, device making noises, can't make or receive calls, and device won't");
-         sendQuickReply(senderID, 
-              [{
-              "content_type":"text",
-              "title":"Proceed",
-              "payload":"qr_gizmo_gadget_proceed"
-            },
-            {
-              "content_type":"text",
-              "title":"Cancel",
-              "payload":"qr_gizmo_gadget_cancel"
-            }],
-            "Keep in mind resetting the unit will clear all contacts and settings. Which will need to be added again.");
+         sendTextMessage(senderID, "A factory data reset may help with a blank or frozen screen, apps crashing or freezing, keypad/touchscreen problems, can't hear, device making noises, can't make or receive calls, and device won't", 
+         function(){sendQuickReply(senderID, 
+                          [{
+                          "content_type":"text",
+                          "title":"Proceed",
+                          "payload":"qr_gizmo_gadget_proceed"
+                        },
+                        {
+                          "content_type":"text",
+                          "title":"Cancel",
+                          "payload":"qr_gizmo_gadget_cancel"
+                        }],
+                        "Keep in mind resetting the unit will clear all contacts and settings. Which will need to be added again.");});
+         
      }
 
 }
