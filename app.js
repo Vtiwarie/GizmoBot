@@ -314,7 +314,7 @@ function receivedMessage(event) {
          sendTextMessage(senderID, "his typically indicates that unit is powered off or not connected to the network. Please power gizmo off and back on.");
           sendTextMessage(senderID, "Once the gizmo is powered back on make an out-bound call from the gizmo to ensure its connected to network.")
      } else if(checkRegex(/\bqr_no_got_call_message\b/im, quickReplyPayload)) {
-         sendAudioMessage(senderID, '/assets/Im resetting-1-sound.m4a');
+         //sendAudioMessage(senderID, '/assets/Im resetting-1-sound.m4a');
          sendQuickReply(senderID, [{
               "content_type":"text",
               "title":"Enter Numbers",
@@ -324,7 +324,7 @@ function receivedMessage(event) {
      } else if(checkRegex(/\bqr_enter_customer_input\b/im, quickReplyPayload)) {
          
          
-     } else if(checkRegex(/\b\b/im, quickReplyPayload)) {
+     } else if(false) {
          
          
      } else if(checkRegex(/\bqr_no_Unable_to_Call_Gizmo\b/im, quickReplyPayload)) {
