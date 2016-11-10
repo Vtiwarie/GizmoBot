@@ -464,7 +464,7 @@ function receivedMessage(event) {
                 }
               }
          });
-     } else if(checkRegex(/\bunable to call gizmo\b/im, messageText)) {
+     } else if(checkRegex(/Unable to Call Gizmo/im, messageText)) {
          sendButtonMessage(senderID, "I am sorry that you are experiencing issues with the ending  calls feature.  Is this happening  when:", [{
             type: "postback",
             title: 'Gizmo calls out?',
