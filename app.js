@@ -279,7 +279,7 @@ function receivedMessage(event) {
     console.log("Quick reply for message %s with payload %s",
       messageId, quickReplyPayload);
       
-      if(checkRegex(/\bqr_yes_Unable to Call Gizmo\b/im, quickReplyPayload)) {
+      if(checkRegex(/\bqr_yes_Unable_to_Call_Gizmo\b/im, quickReplyPayload)) {
          sendQuickReply(senderID, 
               [{
               "content_type":"text",
@@ -327,7 +327,7 @@ function receivedMessage(event) {
      } else if(checkRegex(/\b\b/im, quickReplyPayload)) {
          
          
-     } else if(checkRegex(/\bqr_no_Unable to Call Gizmo\b/im, quickReplyPayload)) {
+     } else if(checkRegex(/\bqr_no_Unable_to_Call_Gizmo\b/im, quickReplyPayload)) {
           sendQuickReply(senderID, 
               [{
               "content_type":"text",
@@ -416,11 +416,6 @@ function receivedMessage(event) {
                 }
               }
          });
-     } else if(checkRegex(/Unable to Call Gizmo/im, messageText)) {
-         sendPostBackMessage(senderID, {
-             
-         });
-         
      } else if(false) {
          
      } else if(false) {
@@ -584,12 +579,12 @@ function receivedPostback(event) {
               [{
               "content_type":"text",
               "title":"Yes",
-              "payload":"qr_yes_Unable to Call Gizmo"
+              "payload":"qr_yes_Unable_to_Call_Gizmo"
             },
             {
               "content_type":"text",
               "title":"No",
-              "payload":"qr_no_Unable to Call Gizmo"
+              "payload":"qr_no_Unable_to_Call_Gizmo"
             }],
             "I’m sorry you are having difficulties calling the gizmo. In order to better assist you I do have a series of ques-tions.\nIs the Gizmo able to call you?");
 
