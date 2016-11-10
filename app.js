@@ -383,23 +383,32 @@ function receivedMessage(event) {
          });
          
      } else if(checkRegex(/\bqr_gizmo_gadget_proceed\b/im, quickReplyPayload)) {
-         sendTextMessage(senderID, "Connect the Gizmo device to the charger or a com-puter via the USB cable.");
-         sendTextMessage(senderID, "Ensure the device is powered on and the home screen is visible.");
-         sendTextMessage(senderID, "Quickly press the End/Back button 4 times.");
-         sendGenericMessage(senderID, 
-             {
-              attachment: {
-                type: "template",
-                payload: {
-                  template_type: "generic",
-                  elements: [{
-                    image_url: SERVER_URL + "/assets/device_front_gadget_1_RESET.jpg",
-                    title: "Quickly press the End/Back button 4 times."
-                  }]
-                }
-              }
-         });
-          sendTextMessage(senderID, "From the \"Reset Gizmogadget\" screen, tap Yes to delete all saved settings and contacts.");
+         sendTextMessage(senderID, "Connect the Gizmo device to the charger or a com-puter via the USB cable.", 
+             new function(){sendTextMessage(senderID, "Ensure the device is powered on and the home screen is visible.", new function(){
+                 sendTextMessage(senderID, "Quickly press the End/Back button 4 times.", 
+                    new function(){
+                        sendGenericMessage(senderID, 
+                         {
+                          attachment: {
+                            type: "template",
+                            payload: {
+                              template_type: "generic",
+                              elements: [{
+                                image_url: SERVER_URL + "/assets/device_front_gadget_1_RESET.jpg",
+                                title: "Quickly press the End/Back button 4 times."
+                              }]
+                            }
+                          }
+                         }, 
+                         new function(){
+                               sendTextMessage(senderID, "From the \"Reset Gizmogadget\" screen, tap Yes to delete all saved settings and contacts.");
+                         });});
+                    });
+                 
+             });
+         
+         
+         
 
          
      } else if(checkRegex(/\bqr_gizmo_gadget_cancel\b/im, quickReplyPayload)) {
@@ -796,7 +805,7 @@ function sendFileMessage(recipientId, messageData) {
  * Send a text message using the Send API.
  *
  */
-function sendTextMessage(recipientId, messageText) {
+function sendTextMessage(recipientId, messageText, callbackFunc) {
   var messageData = {
     recipient: {
       id: recipientId
@@ -807,7 +816,7 @@ function sendTextMessage(recipientId, messageText) {
     }
   };
 
-  callSendAPI(messageData);
+  callSendAPI(messageData, callbackFunc);
 }
 
 /*
@@ -842,7 +851,7 @@ function sendButtonMessage(recipientId, messageText, buttons) {
  * Send a Structured Message (Generic Message type) using the Send API.
  *
  */
-function sendGenericMessage(recipientId, message) {
+function sendGenericMessage(recipientId, message, callbackFunc) {
     if(typeof message != 'object') {
         throw new Error('sendGenericMessage: argument must be an object');
     }
@@ -890,7 +899,7 @@ function sendGenericMessage(recipientId, message) {
     message:message
   };  
 
-  callSendAPI(messageData);
+  callSendAPI(messageData, callbackFunc);
 }
 
 /*
@@ -1068,7 +1077,7 @@ function sendAccountLinking(recipientId) {
  * get the message id in a response 
  *
  */
-function callSendAPI(messageData) {
+function callSendAPI(messageData, callbackFunc) {
   log("Calling: " + this.name);
   request({
     uri: 'https://graph.facebook.com/v2.6/me/messages',
@@ -1087,6 +1096,9 @@ function callSendAPI(messageData) {
       } else {
       console.log("Successfully called Send API for recipient %s", 
         recipientId);
+      }
+      if(callbackFunc && typeof callbackFunc == 'functioin') {
+          callbackFunc();
       }
     } else {
       console.error("Failed calling Send API", response.statusCode, response.statusMessage, body.error);
