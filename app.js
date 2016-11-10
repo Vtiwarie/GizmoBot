@@ -179,7 +179,8 @@ function makeGreeting(event) {
       "setting_type":"greeting",
         "greeting":{
         "text":"Welcome to Gizmo Support!"
-  }
+        }
+    }
   }
 
   callSendAPI(messageData);
