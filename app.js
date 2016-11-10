@@ -409,7 +409,7 @@ function receivedMessage(event) {
     }
     */
 
-     if(checkRegex(/(\bh\w*e\w*l\w*p\b/im, messageText)) {
+     if(checkRegex(/\bh\w*e\w*l\w*p\b/im, messageText)) {
          sendGenericMessage(senderID, 
              {
               attachment: {
