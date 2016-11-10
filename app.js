@@ -279,50 +279,80 @@ function receivedMessage(event) {
     console.log("Quick reply for message %s with payload %s",
       messageId, quickReplyPayload);
       
-      if(checkRegex(/\byes_Unable to Call Gizmo\b/im, quickReplyPayload)) {
+      if(checkRegex(/\bqr_yes_Unable to Call Gizmo\b/im, quickReplyPayload)) {
          sendQuickReply(senderID, 
               [{
               "content_type":"text",
               "title":"Yes",
-              "payload":"yes_call_connects"
+              "payload":"qr_yes_call_connects"
             },
             {
               "content_type":"text",
-              "title":"Comedy",
-              "payload":"no_call_connects"
+              "title":"No",
+              "payload":"qr_no_call_connects"
             }],
             "Great! If you are able to receive calls from the gizmo. Is possible that you might have an outbound caller ID Block.\nIf you dial gizmo # directly with *82 + Gizmo # does the call connect?");
-     }  else if(checkRegex(/\byes_call_connects\b/im, quickReplyPayload)) {
+     }  else if(checkRegex(/\bqr_yes_call_connects\b/im, quickReplyPayload)) {
          sendTextMessage(senderID,"Great! Glad you where able to call. In order to con-tinue calling gizmo you will need to dial *82 to un-block your number when dialing out.\n"
          + "Alternatively you go to the Block and Unblock Ser-vices page in My Verizon to enabled outbound caller ID.")
          
-     } else if(checkRegex(/\bno_call_connects\b/im, quickReplyPayload)) {
+     } else if(checkRegex(/\bqr_no_call_connects\b/im, quickReplyPayload)) {
          sendQuickReply(senderID, 
               [{
               "content_type":"text",
-              "title":"When you called the gizmo did you get this message?\nWelcome to Verizon Wireless. The cellular custom-er you have called is not available at this time. Please try your call again later.”",
-              "payload":"yes_got_call_message"
+              "title":"Yes",
+              "payload":"qr_yes_got_call_message"
             },
             {
               "content_type":"text",
-              "title":"Comedy",
-              "payload":"no_got_call_message"
+              "title":"no",
+              "payload":"qr_no_got_call_message"
             }],
             "When you called the gizmo did you get this mes-sage?\n\"Welcome to Verizon Wireless. The cellular custom-er you have called is not available at this time. Please try your call again later.\"");
          
-     } else if(checkRegex(/\\b/im, quickReplyPayload)) {
+     } else if(checkRegex(/\bqr_yes_got_call_message\b/im, quickReplyPayload)) {
+         sendTextMessage(senderID, "his typically indicates that unit is powered off or not connected to the network. Please power gizmo off and back on.");
+          sendTextMessage(senderID, "Once the gizmo is powered back on make an out-bound call from the gizmo to ensure its connected to network.")
+     } else if(checkRegex(/\bqr_no_got_call_message\b/im, quickReplyPayload)) {
+         sendAudioMessage(senderID, '/assets/Im resetting-1-sound.m4a');
+         sendQuickReply(senderID, [{
+              "content_type":"text",
+              "title":"Enter Numbers",
+              "payload":"qr_enter_customer_input"
+            }])
+         
+     } else if(checkRegex(/\bqr_enter_customer_input\b/im, quickReplyPayload)) {
          
          
-     } else if(checkRegex(/\\b/im, quickReplyPayload)) {
+     } else if(checkRegex(/\b\b/im, quickReplyPayload)) {
          
          
-     } else if(checkRegex(/\\b/im, quickReplyPayload)) {
+     } else if(checkRegex(/\bqr_no_Unable to Call Gizmo\b/im, quickReplyPayload)) {
+          sendQuickReply(senderID, 
+              [{
+              "content_type":"text",
+              "title":"Yes",
+              "payload":"qr_yes_call_other_contacts"
+            },
+            {
+              "content_type":"text",
+              "title":"No",
+              "payload":"qr_no_call_other_contacts"
+            }],
+            "Can the gizmo call any other contact that is regis-tered?");
+     } else if(checkRegex(/\bqr_yes_call_other_contacts\b/im, quickReplyPayload)) {
+         sendTextMessage(senderID, "Please check to ensure the gizmo shows you as a contact. If you’re a secondary caregiver or contact.");
+          sendTextMessage(senderID, "Please call the primary caregiver to ensure your add-ed to the gizmo.");
+
+         
+     } else if(checkRegex(/\bqr_no_call_other_contacts\b/im, quickReplyPayload)) {
+          sendTextMessage(senderID, "Ok. Next step here is to reset the gizmo. This will allow the gizmo to re-activate on network.");
+         
+     } else if(checkRegex(/\b\b/im, quickReplyPayload)) {
          
          
-     } else if(checkRegex(/\\b/im, quickReplyPayload)) {
+     } else if(checkRegex(/\b\b/im, quickReplyPayload)) {
          
-         
-     } else if(checkRegex(/\bno_Unable to Call Gizmo\b/im, quickReplyPayload)) {
          
      }
 
@@ -331,131 +361,6 @@ function receivedMessage(event) {
   }
 
   if (messageText) {
-/*
-    // If we receive a text message, check to see if it matches any special
-    // keywords and send back the corresponding example. Otherwise, just echo
-    // the text we received.
-    switch (messageText) {
-      case 'image':
-        sendImageMessage(senderID);
-        break;
-
-      case 'gif':
-        sendGifMessage(senderID);
-        break;
-
-      case 'audio':
-        sendAudioMessage(senderID);
-        break;
-
-      case 'video':
-        sendVideoMessage(senderID);
-        break;
-
-      case 'file':
-        sendFileMessage(senderID);
-        break;
-
-      case 'button':
-        sendButtonMessage(senderID);
-        break;
-
-      case 'generic':
-        sendGenericMessage(senderID);
-        break;
-
-      case 'receipt':
-        sendReceiptMessage(senderID);
-        break;
-
-      case 'quick reply':
-        sendQuickReply(senderID);
-        break;        
-
-      case 'read receipt':
-        sendReadReceipt(senderID);
-        break;        
-
-      case 'typing on':
-        sendTypingOn(senderID);
-        break;        
-
-      case 'typing off':
-        sendTypingOff(senderID);
-        break;        
-
-      case 'account linking':
-        sendAccountLinking(senderID);
-        break;
-		
-	  case 'register':
-	    sendButtonMessage(senderID, "Message with attachment received", [{
-            type: "web_url",
-            url: "https://www.oculus.com/en-us/rift/",
-            title: "Would you like to register an account?"
-          }, {
-            type: "postback",
-            title: "Trigger Postback",
-            payload: "DEVELOPER_DEFINED_PAYLOAD"
-          }, {
-            type: "phone_number",
-            title: "Call Phone Number",
-            payload: "+16505551234"
-          }]);
-		break;
-		
-	  case 'end':
-		sendTextMessage(senderID, "Message with attachment received");
-		break;
-		
-	  case 'Ending call':
-	 case 'Rejecting call':
-	    sendButtonMessage(senderID, "I am sorry that you are experiencing issues with the ending  calls feature.  Is this happening  when:", [{
-            type: "postback",
-            title: 'Gizmo calls out?',
-            payload: "As long as the gizmo initiates the call to a caregiver of contact, it can hang up on the user."
-
-          }, {
-            type: "postback",
-            title: "Gizmo receives call?",
-            payload: "When a caregiver or contact Initiates call to Gizmo. Once the call is answered the Gizmo will not disconnect call. Call on this case  must be disconnected by contact to end call."
-          }]);
-		break;
-		
-		
-		case 'Change primary caregiver':
-		  case 'Change caregiver':
-		    case 'Change 1st caregiver':
-		      sendButtonMessage(senderID, "Great! I can help you with your request to change primary caregiver. To change primary caregivers the gizmo will need to be reset. Before we proceed please be aware that this will require linking to the gizmo and adding all contacts & settings as if it were a  new gizmo. ", 
-		      [{
-            type:"web_url",
-            url: SERVER_URL + "/assets/Factory Reset Gizmo.pdf",
-            title:"Yes, Please send me reset instructions?",
-            webview_height_ratio: "compact"
-          }, {
-            type:"web_url",
-            url: SERVER_URL + "/assets/Adding or Removing Caregivers.pdf",
-            title:"No, I just want to change other contacts on the gizmo.",
-            webview_height_ratio: "compact" 
-          }])
-		    
-		    break;
-		
-	  case 'reset':
-		sendTextMessage(senderID, "Message with attachment received");
-	     break;
-		 
-	case 'adding a gizmo':
-		sendTextMessage(senderID, "Message with attachment received");
-		break;
-		
-		
-
-      default:
-        sendTextMessage(senderID, messageText);
-    }
-    */
-
      if(checkRegex(/\bh\w*e\w*l\w*p\b/im, messageText)) {
          sendGenericMessage(senderID, 
              {
@@ -679,12 +584,12 @@ function receivedPostback(event) {
               [{
               "content_type":"text",
               "title":"Yes",
-              "payload":"yes_Unable to Call Gizmo"
+              "payload":"qr_yes_Unable to Call Gizmo"
             },
             {
               "content_type":"text",
               "title":"No",
-              "payload":"no_Unable to Call Gizmo"
+              "payload":"qr_no_Unable to Call Gizmo"
             }],
             "I’m sorry you are having difficulties calling the gizmo. In order to better assist you I do have a series of ques-tions.\nIs the Gizmo able to call you?");
 
@@ -778,7 +683,7 @@ function sendGifMessage(recipientId) {
  * Send audio using the Send API.
  *
  */
-function sendAudioMessage(recipientId) {
+function sendAudioMessage(recipientId, payloadUrl) {
   var messageData = {
     recipient: {
       id: recipientId
@@ -787,7 +692,7 @@ function sendAudioMessage(recipientId) {
       attachment: {
         type: "audio",
         payload: {
-          url: SERVER_URL + "/assets/sample.mp3"
+          url: SERVER_URL + payloadUrl
         }
       }
     }
