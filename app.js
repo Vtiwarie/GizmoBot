@@ -370,8 +370,8 @@ function receivedMessage(event) {
                       payload: ""
                     }],
                   }, {
-                    image_url: SERVER_URL + "/assets/LG-Gizmopal1 - 2.jpg",
                     title: "Which Gizmo do you have?",
+                    image_url: SERVER_URL + "/assets/LG-Gizmopal1 - 2.jpg",
                     buttons: [{
                       type: "postback",
                       title: "Select",
@@ -380,7 +380,7 @@ function receivedMessage(event) {
                   }]
                 }
               }
-         })
+         });
          
      } else if(checkRegex(/\b\b/im, quickReplyPayload)) {
          
