@@ -386,7 +386,9 @@ function receivedMessage(event) {
     }
     */
 
-    
+    if(messageText == 'generic') {
+        sendGenericMessage(senderID);
+    } else
     if(checkRegex(/((\br\w*e\w*j\w*e\w*c\w*t)|(\be\w*n\w*d)).*\bcall/im, messageText)) {
         sendButtonMessage(senderID, "I am sorry that you are experiencing issues with the ending  calls feature.  Is this happening  when:", [{
             type: "postback",
