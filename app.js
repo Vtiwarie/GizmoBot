@@ -347,6 +347,40 @@ function receivedMessage(event) {
          
      } else if(checkRegex(/\bqr_no_call_other_contacts\b/im, quickReplyPayload)) {
           sendTextMessage(senderID, "Ok. Next step here is to reset the gizmo. This will allow the gizmo to re-activate on network.");
+          sendGenericMessage(senderID, 
+             {
+              attachment: {
+                type: "template",
+                payload: {
+                  template_type: "generic",
+                  elements: [{
+                    title: "Which Gizmo do you have?",
+                    image_url: SERVER_URL + "/assets/GizmoGadget.png",
+                    buttons: [{
+                      type: "postback",
+                      title: "Select",
+                      payload: ""
+                    }],
+                  }, {
+                    title: "Which Gizmo do you have?",
+                    image_url: SERVER_URL + "/assets/GizmoPal 2-2.png",
+                    buttons: [{
+                      type: "postback",
+                      title: "Select",
+                      payload: ""
+                    }],
+                  }, {
+                    image_url: SERVER_URL + "/assets/LG-Gizmopal1 - 2.jpg",
+                    title: "Which Gizmo do you have?",
+                    buttons: [{
+                      type: "postback",
+                      title: "Select",
+                      payload: ""
+                    }],
+                  }]
+                }
+              }
+         })
          
      } else if(checkRegex(/\b\b/im, quickReplyPayload)) {
          
