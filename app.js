@@ -359,7 +359,7 @@ function receivedMessage(event) {
                     buttons: [{
                       type: "postback",
                       title: "Select",
-                      payload: "my payload"
+                      payload: "pb_gizmo_gadget"
                     }],
                   }, {
                     title: "Which Gizmo do you have?",
@@ -382,12 +382,11 @@ function receivedMessage(event) {
               }
          });
          
-     } else if(checkRegex(/\b\b/im, quickReplyPayload)) {
+     } else if(checkRegex(/\bqr_gizmo_gadget_proceed\b/im, quickReplyPayload)) {
          
          
-     } else if(checkRegex(/\b\b/im, quickReplyPayload)) {
-         
-         
+     } else if(checkRegex(/\bqr_gizmo_gadget_cancel\b/im, quickReplyPayload)) {
+         sendTextMessage("Ok. If you need instructions on how to reset the gizmo in the future you can go to https://www.verizonwireless.com/support/knowledge-base-201101/")
      }
 
     //sendTextMessage(senderID, "Quick reply tapped");
@@ -407,8 +406,8 @@ function receivedMessage(event) {
                     title: "Help",
                     buttons: [{
                       type: "postback",
-                      title: "Unable to call gizmo",
-                      payload: "Unable to call gizmo"
+                      title: "Unable to Call Gizmo",
+                      payload: "pb_unable_call_gizmo"
                     }, {
                       type: "postback",
                       title: "Gizmo Drops Out",
@@ -608,7 +607,7 @@ function receivedPostback(event) {
   // let them know it was successful
   //sendTextMessage(senderID, (payload !== null && payload !== undefined && payload != "") ? payload : "Postback called");
   
-     if(checkRegex(/\bUnable to Call Gizmo\b/im, payload)) {
+     if(checkRegex(/\bpb_unable_call_gizmo\b/im, payload)) {
          sendQuickReply(senderID, 
               [{
               "content_type":"text",
@@ -621,8 +620,21 @@ function receivedPostback(event) {
               "payload":"qr_no_Unable_to_Call_Gizmo"
             }],
             "I’m sorry you are having difficulties calling the gizmo. In order to better assist you I do have a series of ques-tions.\nIs the Gizmo able to call you?");
-
-     } 
+     } else if(checkRegex(/\bpb_gizmo_gadget\b/im, payload)) {
+         sendTextMessage(senderID, "A factory data reset may help with a blank or frozen screen, apps crashing or freezing, keypad/touchscreen problems, can't hear, device making noises, can't make or receive calls, and device won't");
+         sendQuickReply(senderID, 
+              [{
+              "content_type":"text",
+              "title":"Proceed",
+              "payload":"qr_gizmo_gadget_proceed"
+            },
+            {
+              "content_type":"text",
+              "title":"Cancel",
+              "payload":"qr_gizmo_gadget_cancel"
+            }],
+            "Keep in mind resetting the unit will clear all contacts and settings. Which will need to be added again.");
+     }
 
 }
 
