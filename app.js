@@ -92,13 +92,6 @@ app.post('/webhook', function (req, res) {
   var data = req.body;
   console.log(req);
 
-  callSendAPI({
-      "setting_type":"greeting",
-        "greeting":{
-        "text":"Welcome to Gizmo Support!"
-  }
-  });
-
   // Make sure this is a page subscription
   if (data.object == 'page') {
     // Iterate over each entry
@@ -124,6 +117,9 @@ app.post('/webhook', function (req, res) {
         } else {
           console.log("Webhook received unknown messagingEvent: ", messagingEvent);
         }
+        log('MESSAGING EVENT: \n')
+        log(messagingEvent);
+        makeGreeting(messagingEvent);
       });
     });
 
@@ -215,6 +211,56 @@ function receivedAuthentication(event) {
   // When an authentication is received, we'll send a message back to the sender
   // to let them know it was successful.
   sendTextMessage(senderID, "Authentication successful");
+}
+
+function makeGreeting(event) {
+  var senderID = event.sender.id;
+  var recipientID = event.recipient.id;
+  var timeOfMessage = event.timestamp;
+  var message = event.message;
+      if(typeof buttons != "object" || buttons == null) {
+    return;
+  }
+  
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "button",
+          text: (messageText && messageText != "") ? messageText : "This is a test button text",
+         /* buttons:[{
+            type: "web_url",
+            url: "https://www.oculus.com/en-us/rift/",
+            title: "Open Web URL"
+          }, {
+            type: "postback",
+            title: "Trigger Postback",
+            payload: "DEVELOPER_DEFINED_PAYLOAD"
+          }, {
+            type: "phone_number",
+            title: "Call Phone Number",
+            payload: "+16505551234"
+          }]*/
+          buttons: buttons
+        }
+      }
+    }
+  };  
+
+  callSendAPI(messageData);
+    
+  callSendAPI({
+      "setting_type":"greeting",
+        "greeting":{
+        "text":"Welcome to Gizmo Support!"
+  }
+  });
+  
+  
 }
 
 /*
