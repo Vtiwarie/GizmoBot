@@ -417,18 +417,19 @@ function receivedMessage(event) {
                 payload: {
                   template_type: "generic",
                   elements: [{
-                    title: "Unable to call gizmo, Calls Drop-pings, Gizmo cannot call Out",
-                    //subtitle: "Unable to call gizmo, Calls Drop-pings, Gizmo cannot call Out",
-                    //item_url: "https://www.oculus.com/en-us/rift/",          
                     image_url: SERVER_URL + "/assets/Call Icon.png",
                     buttons: [{
-                      type: "web_url",
-                      url: "https://www.oculus.com/en-us/rift/",
-                      title: "Open Web URL"
+                      type: "postback",
+                      title: "Unable to call gizmo",
+                      payload: "Unable to Call Gizmo"
                     }, {
                       type: "postback",
-                      title: "Call Postback",
-                      payload: "Payload for first bubble",
+                      title: "Gizmo Drops Out",
+                      payload: "Call Droppings",
+                    }, {
+                      type: "postback",
+                      title: "Cannot Call Out",
+                      payload: "Call Droppings",
                     }],
                   }, {
                     title: "Unable to Link, Linking Replace-ment Gizmo, Changing Primary CareGiver, Adding Caregivers",
@@ -462,8 +463,24 @@ function receivedMessage(event) {
                 }
               }
          });
-     }
-    if(checkRegex(/((\br\w*e\w*j\w*e\w*c\w*t)|(\be\w*n\w*d)).*\bcall/im, messageText)) {
+     } else if(checkRegex(/\bunable to call gizmo\b/im, messageText)) {
+         
+         
+     } else if(false) {
+         
+     } else if(false) {
+         
+     } else if(false) {
+         
+     } else if(false) {
+         
+     } else if(false) {
+         
+     } else if(false) {
+         
+     } else if(false) {
+         
+     } else if(checkRegex(/((\br\w*e\w*j\w*e\w*c\w*t)|(\be\w*n\w*d)).*\bcall/im, messageText)) {
         sendButtonMessage(senderID, "I am sorry that you are experiencing issues with the ending  calls feature.  Is this happening  when:", [{
             type: "postback",
             title: 'Gizmo calls out?',
