@@ -1016,7 +1016,7 @@ function sendQuickReply(recipientId, quick_reply_message_array, text, attachment
       id: recipientId
     },
     message: {
-      text: 'fsdf',
+      text: text,
       attachment: attachment,
       quick_replies: quick_reply_message_array
     }
