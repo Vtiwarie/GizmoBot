@@ -383,7 +383,24 @@ function receivedMessage(event) {
          });
          
      } else if(checkRegex(/\bqr_gizmo_gadget_proceed\b/im, quickReplyPayload)) {
-         
+         sendTextMessage(senderID, "Connect the Gizmo device to the charger or a com-puter via the USB cable.");
+         sendTextMessage(senderID, "Ensure the device is powered on and the home screen is visible.");
+         sendTextMessage(senderID, "Quickly press the End/Back button 4 times.");
+         sendGenericMessage(senderID, 
+             {
+              attachment: {
+                type: "template",
+                payload: {
+                  template_type: "generic",
+                  elements: [{
+                    image_url: SERVER_URL + "/assets/device_front_gadget_1_RESET.jpg",
+                    title: "Quickly press the End/Back button 4 times."
+                  }]
+                }
+              }
+         });
+          sendTextMessage(senderID, "From the \"Reset Gizmogadget\" screen, tap Yes to delete all saved settings and contacts.");
+
          
      } else if(checkRegex(/\bqr_gizmo_gadget_cancel\b/im, quickReplyPayload)) {
          sendTextMessage(senderID, "Ok. If you need instructions on how to reset the gizmo in the future you can go to https://www.verizonwireless.com/support/knowledge-base-201101/")
@@ -419,8 +436,6 @@ function receivedMessage(event) {
                     }],
                   }, {
                     title: "Unable to Link, Linking Replace-ment Gizmo, Changing Primary CareGiver, Adding Caregivers",
-                    //subtitle: "Your Hands, Now in VR",
-                    //item_url: "https://www.oculus.com/en-us/touch/",               
                     image_url: SERVER_URL + "/assets/Registration Icon.png",
                     buttons: [{
                       type: "web_url",
@@ -433,8 +448,6 @@ function receivedMessage(event) {
                     }]
                   }, {
                     title: "Setting up Place Alerts, Schedule Location Checks, To-Do List",
-                    //subtitle: "Your Hands, Now in VR",
-                    //item_url: "https://www.oculus.com/en-us/touch/",               
                     image_url: SERVER_URL + "/assets/Gear.png",
                     buttons: [{
                       type: "web_url",
