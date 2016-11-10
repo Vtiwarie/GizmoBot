@@ -639,7 +639,7 @@ function receivedPostback(event) {
               "title":"No",
               "payload":"no_Unable to Call Gizmo"
             },
-            "I’m sorry you are having difficulties calling the gizmo. In order to better assist you I do have a series of ques-tions.");
+            "I’m sorry you are having difficulties calling the gizmo. In order to better assist you I do have a series of ques-tions.\nIs the Gizmo able to call you?");
 
      } else if(checkRegex(/\byes_Unable to Call Gizmo\b/im, payload)) {
          sendQuickReply(senderID, 
@@ -1016,7 +1016,7 @@ function sendQuickReply(recipientId, quick_reply_message_array, text, attachment
       id: recipientId
     },
     message: {
-      text: text,
+      text: 'fsdf',
       attachment: attachment,
       quick_replies: quick_reply_message_array
     }
