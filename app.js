@@ -80,56 +80,6 @@ app.get('/webhook', function(req, res) {
   }  
 });
 
-
-/*
- * All callbacks for Messenger are POST-ed. They will be sent to the same
- * webhook. Be sure to subscribe your app to your page to receive callbacks
- * for your page. 
- * https://developers.facebook.com/docs/messenger-platform/product-overview/setup#subscribe_app
- *
- */
-app.post('/webhook', function (req, res) {
-  var data = req.body;
-  console.log(req);
-  
-  
-
-  // Make sure this is a page subscription
-  if (data.object == 'page') {
-    // Iterate over each entry
-    // There may be multiple if batched
-    data.entry.forEach(function(pageEntry) {
-      var pageID = pageEntry.id;
-      var timeOfEvent = pageEntry.time;
-
-      // Iterate over each messaging event
-      pageEntry.messaging.forEach(function(messagingEvent) {
-        if (messagingEvent.optin) {
-          receivedAuthentication(messagingEvent);
-        } else if (messagingEvent.message) {
-          receivedMessage(messagingEvent);
-        } else if (messagingEvent.delivery) {
-          receivedDeliveryConfirmation(messagingEvent);
-        } else if (messagingEvent.postback) {
-          receivedPostback(messagingEvent);
-        } else if (messagingEvent.read) {
-          receivedMessageRead(messagingEvent);
-        } else if (messagingEvent.account_linking) {
-          receivedAccountLink(messagingEvent);
-        } else {
-          console.log("Webhook received unknown messagingEvent: ", messagingEvent);
-        }
-      });
-    });
-
-    // Assume all went well.
-    //
-    // You must send back a 200, within 20 seconds, to let us know you've 
-    // successfully received the callback. Otherwise, the request will time out.
-    res.sendStatus(200);
-  }
-});
-
 /*
  * This path is used for account linking. The account linking call-to-action
  * (sendAccountLinking) is pointed to this URL. 
@@ -425,6 +375,14 @@ function receivedMessage(event) {
             title:"iPhone",
             webview_height_ratio: "compact" 
           }]);
+    } else if(checkRegex(/(\bh\w*e\w*l\w*p\b)/im, messageText)) {
+
+        sendButtonMessage(senderID, "I can help with requests such as setting up place alerts, scheduled location checks, adding caregivers, linking to your gizmo, changing primary caregiver, activating re-placement gizmo.", 
+		  [{
+            type: "postback",
+            title:"Android",
+            webview_height_ratio: "compact"
+          }]);
     } else {
         sendTextMessage(senderID, "I didn't get that. Please rephrase.");
     }
@@ -434,24 +392,130 @@ function receivedMessage(event) {
   }
 }
 
-function log(msg, funcName) {
-    if(!msg || msg.length < 1 || msg == '') {
-        console.log('Could not report log');
+
+/*
+ * All callbacks for Messenger are POST-ed. They will be sent to the same
+ * webhook. Be sure to subscribe your app to your page to receive callbacks
+ * for your page. 
+ * https://developers.facebook.com/docs/messenger-platform/product-overview/setup#subscribe_app
+ *
+ */
+app.post('/webhook', function (req, res) {
+  var data = req.body;
+  console.log(req);
+  var node = new TextNode('my test text');
+  node.test();
+  node.testText();
+  
+  
+
+  // Make sure this is a page subscription
+  if (data.object == 'page') {
+    // Iterate over each entry
+    // There may be multiple if batched
+    data.entry.forEach(function(pageEntry) {
+      var pageID = pageEntry.id;
+      var timeOfEvent = pageEntry.time;
+
+      // Iterate over each messaging event
+      pageEntry.messaging.forEach(function(messagingEvent) {
+        if (messagingEvent.optin) {
+          receivedAuthentication(messagingEvent);
+        } else if (messagingEvent.message) {
+          receivedMessage(messagingEvent);
+        } else if (messagingEvent.delivery) {
+          receivedDeliveryConfirmation(messagingEvent);
+        } else if (messagingEvent.postback) {
+          receivedPostback(messagingEvent);
+        } else if (messagingEvent.read) {
+          receivedMessageRead(messagingEvent);
+        } else if (messagingEvent.account_linking) {
+          receivedAccountLink(messagingEvent);
+        } else {
+          console.log("Webhook received unknown messagingEvent: ", messagingEvent);
+        }
+      });
+    });
+
+    // Assume all went well.
+    //
+    // You must send back a 200, within 20 seconds, to let us know you've 
+    // successfully received the callback. Otherwise, the request will time out.
+    res.sendStatus(200);
+  }
+});
+
+
+//Node class
+function Node() {
+    if(this.constructor == Node) {
+        throw new Error('Cannot instantiate abstract Node class');
     }
+    
+    Node.prototype.test = function() {
+        log('Running Node.test()');
+    }
+}
+
+function TextNode(text) {
+    Node.call(this);
+    this.mText = (text && typeof text == 'string' && text.length>0) ? text : '';
+
+    TextNode.prototype.testText = function() {
+        log('mText: ' + this.mText);
+    }
+
+}
+TextNode.prototype = Object.create(Node.prototype);
+TextNode.prototype.constructor = TextNode;
+
+
+function ButtonNode(arrButtons) {
+    TextNode.call(this);
+    this.arrButtons = arrButtons;
+    if(arrButtons && arrButtons instanceof Array) {
+        
+    } else {
+        ergMsg("Butto", arguments.callee);
+    }
+}
+
+
+
+/*
+function ButtonNode() {
+    ButtonNode.Prototype.setButtons(arrButtons) = function() {
+        if( !(arrButtons instanceof Array)) {
+            
+        }
+    }
+}
+*/
+function Slider() {
+    
+}
+
+
+function log(msg, func) {
     var logText = "--------LOG-------\n";
+    if(!msg || typeof msg != 'string' || msg == '') {
+        console.log(logText + 'Could not report log');
+        console.log('-------------------');
+    } else {
+    var funcName = (!func || !func.arguments || !func.arguments.callee) ? '': func.arguments.callee.name;
     var funcLogText = "--------" + funcName + "-------\n";
-    if(funcName && funcName.length>0 && funcName != '') {
+    if(funcName && typeof funcName == 'string' && funcName.length>0 && funcName != '') {
          console.log(funcLogText + msg);
     } else {
         console.log(logText + msg);
     }
-    return;
-   
+      console.log('-------------------');
+      return;
+
+    }
 }
 
 function checkRegex (regex, txt) {
-    debugFunc(arguments.callee);
- 
     if(regex && txt && (regex instanceof RegExp) && txt != '') {
         return regex.test(txt);
     } else {
@@ -461,23 +525,26 @@ function checkRegex (regex, txt) {
 }
 
 function debugFunc(func) {
-    if(!func || typeof func != 'function') {
-        log(func + ' is not a function', arguments.callee.name);
+    if(!func || !func.arguments || !func.arguments.callee || typeof func.arguments.callee != 'function') {
+        log('Could not detect function');
+        return;
     } else {
         var msg = '';
-        for(var i=0; i<func.arguments.length; i++) {
-            msg += 'Param: ' + i + "\nParam Type: " + typeof func.arguments[i] + "\nVal: " + func.arguments[i] + "\n";
+        if(func.arguments.length < 1) {
+            msg = 'No parameters provided';
+        } else {
+            for(var i=0; i<func.arguments.length; i++) {
+                msg += 'Param: ' + i + "\nParam Type: " + typeof func.arguments[i] + "\nVal: " + func.arguments[i] + "\n";
+            }
         }
+        
         log(msg, func.arguments.callee.name);
+        return;
     } 
 }
         
-function errorMsg(funcName, errMsg) {
-    if(funcName && typeof funcName == 'string' && errMsg && typeof errMsg == 'string') {
-        console.log('ERROR [' + funcName + ']: ' + errMsg);
-    } else {
-        console.log('ERROR: [No message]');
-    }
+function errorMsg(errMsg, func) {
+    log('[ERROR] ' + errMsg, func);
 }
 
 
