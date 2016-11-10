@@ -314,7 +314,6 @@ function receivedMessage(event) {
          sendTextMessage(senderID, "his typically indicates that unit is powered off or not connected to the network. Please power gizmo off and back on.");
           sendTextMessage(senderID, "Once the gizmo is powered back on make an out-bound call from the gizmo to ensure its connected to network.")
      } else if(checkRegex(/\bqr_no_got_call_message\b/im, quickReplyPayload)) {
-         //sendAudioMessage(senderID, '/assets/Im resetting-1-sound.m4a');
          sendQuickReply(senderID, [{
               "content_type":"text",
               "title":"Enter Numbers",
@@ -402,7 +401,7 @@ function receivedMessage(event) {
                              }, 
                              function(){sendTextMessage(senderID, "From the \"Reset Gizmogadget\" screen, tap Yes to delete all saved settings and contacts.",
                                            function(){sendTextMessage(senderID, "A voice message tells the user that the GizmoPal is resetting",
-                                               function(){sendAudioMessage(senderID, '/assets/Im resetting-1-sound.mp3')});
+                                               function(){sendTextMessage(senderID, '/assets/Im resetting-1-sound.mp3')});
                                                
                                            });
                                            
