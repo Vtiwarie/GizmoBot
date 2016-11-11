@@ -315,7 +315,7 @@ function receivedMessage(event) {
             "When you called the gizmo did you get this mes-sage?\n\"Welcome to Verizon Wireless. The cellular custom-er you have called is not available at this time. Please try your call again later.\"");
          
      } else if(checkRegex(/\bqr_yes_got_call_message\b/im, quickReplyPayload)) {
-         sendTextMessage(senderID, "his typically indicates that unit is powered off or not connected to the network. Please power gizmo off and back on.");
+         sendTextMessage(senderID, "This typically indicates that unit is powered off or not connected to the network. Please power gizmo off and back on.");
           sendTextMessage(senderID, "Once the gizmo is powered back on make an out-bound call from the gizmo to ensure its connected to network.")
      } else if(checkRegex(/\bqr_no_got_call_message\b/im, quickReplyPayload)) {
          sendQuickReply(senderID, [{
