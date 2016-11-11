@@ -324,9 +324,24 @@ function receivedMessage(event) {
      } else if(checkRegex(/\bqr_no_got_call_message\b/im, quickReplyPayload)) {
          sendQuickReply(senderID, [{
               "content_type":"text",
-              "title":"Enter Numbers",
+              "title":"2",
               "payload":"qr_enter_customer_input"
-            }])
+            },
+            {
+              "content_type":"text",
+              "title":"3",
+              "payload":"qr_enter_customer_input"
+            },
+            {
+              "content_type":"text",
+              "title":"4",
+              "payload":"qr_enter_customer_input"
+            },
+            {
+              "content_type":"text",
+              "title":"Other",
+              "payload":"qr_enter_customer_input"
+            }]);
          
      } else if(checkRegex(/\bqr_enter_customer_input\b/im, quickReplyPayload)) {
          
@@ -482,8 +497,8 @@ function receivedMessage(event) {
                 }
               }
          });
-     } else if(false) {
-         
+     } else if(checkRegex(/\bh\w*i\w*\b/im, messageText)) {
+        sendTextMessage(senderID, "Hi. What do you want from me??");         
      } else if(false) {
          
      } else if(false) {
