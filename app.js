@@ -346,14 +346,64 @@ function receivedMessage(event) {
          
      } else if(checkRegex(/\bqr_enter_customer_input_2\b/im, quickReplyPayload)) {
          sendTextMessage(senderID, "Please check the number and dial again. You must dial the area code plus the number you wish to reach.");
-     }else if(checkRegex(/\bqr_enter_customer_input_3\b/im, quickReplyPayload)) {
-          sendTextMessage(senderID, "Please contact customer care to further assist.\nYou can call from your Verizon cell by dialing #611 or calling 1 (800) 922-0204.");
-     }else if(checkRegex(/\bqr_enter_customer_input_4\b/im, quickReplyPayload)) {
+     } else if(checkRegex(/\bqr_enter_customer_input_3\b/im, quickReplyPayload)) {
+          sendTextMessage(senderID, "Please contact customer care to further assist.\n\nYou can call from your Verizon cell by dialing #611 or calling 1 (800) 922-0204.");
+     } else if(checkRegex(/\bqr_enter_customer_input_4\b/im, quickReplyPayload)) {
           sendTextMessage(senderID, "Please check the number and dial again. You must dial the area code plus the number you wish to reach.");
-     }else if(checkRegex(/\bqr_enter_customer_input_other\b/im, quickReplyPayload)) {
+     } else if(checkRegex(/\bqr_enter_customer_input_other\b/im, quickReplyPayload)) {
+         sendTextMessage(senderID, "", 
+         function() {sendQuickReply(senderID, [
+             {
+              "content_type":"text",
+              "title":"Yes",
+              "payload":"qr_yes_enter_customer_input_other"
+            },
+            {
+              "content_type":"text",
+              "title":"No",
+              "payload":"qr_no_enter_customer_input_other"
+            }],
+            "Can any of the registered contacts call the gizmo?");
+         });
+          
+         
+     } else if(checkRegex(/\bqr_yes_enter_customer_input_other\b/im, quickReplyPayload)) {
+         sendQuickReply(senderID, [
+             {
+              "content_type":"text",
+              "title":"Yes",
+              "payload":"qr_yes_enter_customer_input_other_can_call"
+            },
+            {
+              "content_type":"text",
+              "title":"No",
+              "payload":"qr_yes_enter_customer_input_other_cannot_call"
+            }],
+            "Can you call the Gizmo now?");
+         
+     } else if(checkRegex(/\bqr_no_enter_customer_input_other\b/im, quickReplyPayload)) {
+         sendTextMessage(senderID, "Ok. Next step here is to reset the gizmo. This will allow the gizmo to re-activate on network.", 
+         function(){
+             Flow_Which_Gizmo();
+         })
          
          
-     } else if(false) {
+     } else if(checkRegex(/\qr_yes_enter_customer_input_other_can_call\b/im, quickReplyPayload)) {
+         sendTextMessage(senderID, "Great! Glad this cleared the issue for you.");
+         
+     } else if(checkRegex(/\qr_yes_enter_customer_input_other_cannot_call\b/im, quickReplyPayload)) {
+          sendTextMessage(senderID, "Please contact customer care to further assist. It appears there might a network issue when calling from your # to the gizmo.", 
+            function(){
+                  sendTextMessage(senderID, "You can call from your Verizon cell by dialing #611 or calling 1 (800) 922-0204.");
+            });
+
+     }else if(false) {
+         
+         
+     }else if(false) {
+         
+         
+     }else if(false) {
          
          
      } else if(checkRegex(/\bqr_no_Unable_to_Call_Gizmo\b/im, quickReplyPayload)) {
@@ -731,7 +781,17 @@ function receivedPostback(event) {
      } else if(checkRegex(/\bpb_ending_calls_still_issues_2\b/im, payload)) {
          sendTextMessage(senderID, "Ok. If gizmo still not able to hang up calls when calling out. Next step here is to reset the gizmo.",
             function() {sendTextMessage(senderID, "Which Gizmo do you have?", 
-                function(){sendGenericMessage(senderID, 
+                function(){
+                    Flow_Which_Gizmo();
+                });
+                
+            });
+     }
+    
+}
+
+function Flow_Which_Gizmo() {
+    sendGenericMessage(senderID, 
                          {
                           attachment: {
                             type: "template",
@@ -765,12 +825,6 @@ function receivedPostback(event) {
                             }
                           }
                      });
-                    
-                });
-                
-            });
-     }
-    
 }
 /*
  * Message Read Event
