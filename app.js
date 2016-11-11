@@ -388,10 +388,10 @@ function receivedMessage(event) {
          })
          
          
-     } else if(checkRegex(/\qr_yes_enter_customer_input_other_can_call\b/im, quickReplyPayload)) {
+     } else if(checkRegex(/\bqr_yes_enter_customer_input_other_can_call\b/im, quickReplyPayload)) {
          sendTextMessage(senderID, "Great! Glad this cleared the issue for you.");
          
-     } else if(checkRegex(/\qr_yes_enter_customer_input_other_cannot_call\b/im, quickReplyPayload)) {
+     } else if(checkRegex(/\bqr_yes_enter_customer_input_other_cannot_call\b/im, quickReplyPayload)) {
           sendTextMessage(senderID, "Please contact customer care to further assist. It appears there might a network issue when calling from your # to the gizmo.", 
             function(){
                   sendTextMessage(senderID, "You can call from your Verizon cell by dialing #611 or calling 1 (800) 922-0204.");
