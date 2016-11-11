@@ -434,7 +434,7 @@ function receivedMessage(event) {
                 payload: {
                   template_type: "generic",
                   elements: [{
-                    image_url: SERVER_URL + "/assets/Call Icon.png",
+                    image_url: SERVER_URL + "/assets/Call_Icon.png",
                     title: "Help",
                     buttons: [{
                       type: "postback",
@@ -451,7 +451,7 @@ function receivedMessage(event) {
                     }],
                   }, {
                     title: "Unable to Link, Linking Replace-ment Gizmo, Changing Primary CareGiver, Adding Caregivers",
-                    image_url: SERVER_URL + "/assets/Registration Icon.png",
+                    image_url: SERVER_URL + "/assets/Registration_Icon.png",
                     buttons: [{
                       type: "web_url",
                       url: "https://www.oculus.com/en-us/touch/",
