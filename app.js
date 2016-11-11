@@ -678,12 +678,12 @@ function receivedPostback(event) {
             [{
                 type: "postback",
                 title: "Unable to call gizmo",
-                payload: ""
+                payload: "my payload"
               },
               {
                 type: "postback",
                 title: "Calls Dropping",
-                payload: ""
+                payload: "my payload"
               },
               {
                 type: "postback",
@@ -704,7 +704,7 @@ function receivedPostback(event) {
                                 buttons: [{
                                   type: "postback",
                                   title: "Select",
-                                  payload: ""
+                                  payload: "my payload"
                                 }],
                               }, {
                                 title: "Gizmo Pal 2",
@@ -712,7 +712,7 @@ function receivedPostback(event) {
                                 buttons: [{
                                   type: "postback",
                                   title: "Select",
-                                  payload:""
+                                  payload:"my payload"
                                 }]
                               }, {
                                 title: "Gizmo Pal 1",
@@ -720,7 +720,7 @@ function receivedPostback(event) {
                                 buttons: [{
                                   type: "postback",
                                   title: "Select",
-                                  payload:""
+                                  payload:"my payload"
                                 }]
                               }]
                             }
