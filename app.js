@@ -280,7 +280,7 @@ function receivedMessage(event) {
       messageId, quickReplyPayload);
       
       if(checkRegex(/\bqr_yes_Unable_to_Call_Gizmo\b/im, quickReplyPayload)) {
-          sendTextMessage(senderID, "Great! If you are able to receive calls from the gizmo. Is possible that you might have an outbound caller ID Block.", 
+          sendTextMessage(senderID, "Great! If you are able to receive calls from the gizmo. It's possible that you might have an outbound caller ID Block.", 
             function(){sendQuickReply(senderID, 
                           [{
                           "content_type":"text",
@@ -297,8 +297,8 @@ function receivedMessage(event) {
             });
          
      }  else if(checkRegex(/\bqr_yes_call_connects\b/im, quickReplyPayload)) {
-         sendTextMessage(senderID,"Great! Glad you where able to call. In order to con-tinue calling gizmo you will need to dial *82 to un-block your number when dialing out.",
-            function(){sendTextMessage(senderID, "Alternatively you go to the Block and Unblock Services page in My Verizon to enabled outbound caller ID.")});
+         sendTextMessage(senderID,"Great! Glad you where able to call. In order to continue calling gizmo you will need to dial *82 to un-block your number when dialing out.",
+            function(){sendTextMessage(senderID, "Alternatively, you go to the Block and Unblock Services page in My Verizon to enabled outbound caller ID.")});
          
      } else if(checkRegex(/\bqr_no_call_connects\b/im, quickReplyPayload)) {
          sendTextMessage(senderID, "When you called the gizmo did you get this message?", 
@@ -313,13 +313,13 @@ function receivedMessage(event) {
               "title":"no",
               "payload":"qr_no_got_call_message"
             }],
-            "\"Welcome to Verizon Wireless. The cellular custom-er you have called is not available at this time. Please try your call again later.\"");
+            "\"Welcome to Verizon Wireless. The cellular customer you have called is not available at this time. Please try your call again later.\"");
              });
          
          
      } else if(checkRegex(/\bqr_yes_got_call_message\b/im, quickReplyPayload)) {
          sendTextMessage(senderID, "This typically indicates that unit is powered off or not connected to the network. Please power gizmo off and back on.",
-            function(){sendTextMessage(senderID, "Once the gizmo is powered back on make an out-bound call from the gizmo to ensure its connected to network.")});
+            function(){sendTextMessage(senderID, "Once the gizmo is powered back on make an outbound call from the gizmo to ensure its connected to network.")});
           
      } else if(checkRegex(/\bqr_no_got_call_message\b/im, quickReplyPayload)) {
          sendQuickReply(senderID, [{
@@ -438,7 +438,7 @@ function receivedMessage(event) {
               });
           
      } else if(checkRegex(/\bqr_gizmo_gadget_proceed\b/im, quickReplyPayload)) {
-         sendTextMessage(senderID, "Connect the Gizmo device to the charger or a com-puter via the USB cable.", 
+         sendTextMessage(senderID, "Connect the Gizmo device to the charger or a computer via the USB cable.", 
              function(){sendTextMessage(senderID, "Ensure the device is powered on and the home screen is visible.", 
                  function(){sendTextMessage(senderID, "Quickly press the End/Back button 4 times.", 
                         function(){
@@ -456,7 +456,7 @@ function receivedMessage(event) {
                               }
                              }, 
                              function(){sendTextMessage(senderID, "From the \"Reset Gizmogadget\" screen, tap Yes to delete all saved settings and contacts.",
-                                           function(){sendTextMessage(senderID, "A voice message tells the user that the GizmoPal is resetting",
+                                           function(){sendTextMessage(senderID, "The Gizmo will give you a voice confirmation when resetting.",
                                                function(){sendAudioMessage(senderID, '/assets/resetting.mp3')});
                                                
                                            });
@@ -691,7 +691,7 @@ function receivedPostback(event) {
   //sendTextMessage(senderID, (payload !== null && payload !== undefined && payload != "") ? payload : "Postback called");
   
      if(checkRegex(/\bpb_unable_call_gizmo\b/im, payload)) {
-         sendTextMessage(senderID, "I’m sorry you are having difficulties calling the gizmo. In order to better assist you I do have a series of ques-tions.", 
+         sendTextMessage(senderID, "I’m sorry you are having difficulties calling the gizmo. In order to better assist you I do have a series of questions.", 
             function(){sendQuickReply(senderID, 
                           [{
                           "content_type":"text",
@@ -707,7 +707,7 @@ function receivedPostback(event) {
                         });
          
      } else if(checkRegex(/\bpb_gizmo_gadget\b/im, payload)) {
-         sendTextMessage(senderID, "A factory data reset may help with a blank or frozen screen, apps crashing or freezing, keypad/touchscreen problems, can't hear, device making noises, can't make or receive calls, and device won't", 
+         sendTextMessage(senderID, "A factory data reset may help with a blank or frozen screen, apps crashing or freezing, keypad/touchscreen problems, can't hear, device making noises, can't make or receive calls, and device won't sync", 
          function(){sendQuickReply(senderID, 
                           [{
                           "content_type":"text",
