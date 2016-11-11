@@ -452,7 +452,8 @@ function receivedMessage(event) {
                       title: "Cannot Call Out",
                       payload: "Cannot Call Out",
                     }],
-                  }, {
+                  }, 
+                  {
                     title: "Unable to Link, Linking Replace-ment Gizmo, Changing Primary CareGiver, Adding Caregivers",
                     image_url: SERVER_URL + "/assets/Register_Icon.png",
                     buttons: [{
@@ -464,7 +465,8 @@ function receivedMessage(event) {
                       title: "Call Postback",
                       payload: "Payload for second bubble",
                     }]
-                  }, {
+                  }, 
+                  {
                     title: "Setting up Place Alerts, Schedule Location Checks, To-Do List",
                     image_url: SERVER_URL + "/assets/Gear.png",
                     buttons: [{
