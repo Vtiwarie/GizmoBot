@@ -384,7 +384,7 @@ function receivedMessage(event) {
      } else if(checkRegex(/\bqr_no_enter_customer_input_other\b/im, quickReplyPayload)) {
          sendTextMessage(senderID, "Ok. Next step here is to reset the gizmo. This will allow the gizmo to re-activate on network.", 
          function(){
-             Flow_Which_Gizmo();
+             Flow_Which_Gizmo(senderID);
          })
          
          
@@ -780,12 +780,12 @@ function receivedPostback(event) {
               }]);
      } else if(checkRegex(/\bpb_ending_calls_still_issues_2\b/im, payload)) {
          sendTextMessage(senderID, "Ok. If gizmo still not able to hang up calls when calling out. Next step here is to reset the gizmo.",
-            function() {Flow_Which_Gizmo();});
+            function() {Flow_Which_Gizmo(senderID);});
      }
     
 }
 
-function Flow_Which_Gizmo() {
+function Flow_Which_Gizmo(senderID) {
     sendTextMessage(senderID, "Which Gizmo do you have?", 
     function(){sendGenericMessage(senderID, 
              {
