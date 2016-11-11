@@ -351,7 +351,7 @@ function receivedMessage(event) {
      } else if(checkRegex(/\bqr_enter_customer_input_4\b/im, quickReplyPayload)) {
           sendTextMessage(senderID, "Please check the number and dial again. You must dial the area code plus the number you wish to reach.");
      } else if(checkRegex(/\bqr_enter_customer_input_other\b/im, quickReplyPayload)) {
-         sendTextMessage(senderID, "", 
+         sendTextMessage(senderID, "It appears that the gizmo might not be registered to the network. Please power gizmo off and back on.", 
          function() {sendQuickReply(senderID, [
              {
               "content_type":"text",
