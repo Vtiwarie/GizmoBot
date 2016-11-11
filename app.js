@@ -780,52 +780,53 @@ function receivedPostback(event) {
               }]);
      } else if(checkRegex(/\bpb_ending_calls_still_issues_2\b/im, payload)) {
          sendTextMessage(senderID, "Ok. If gizmo still not able to hang up calls when calling out. Next step here is to reset the gizmo.",
-            function() {sendTextMessage(senderID, "Which Gizmo do you have?", 
-                function(){
-                    Flow_Which_Gizmo();
-                });
-                
-            });
+            function() {Flow_Which_Gizmo();}
      }
     
 }
 
 function Flow_Which_Gizmo() {
-    sendGenericMessage(senderID, 
-                         {
-                          attachment: {
-                            type: "template",
-                            payload: {
-                              template_type: "generic",
-                              elements: [{
-                                image_url: SERVER_URL + "/assets/GizmoGadget.png",
-                                title: "Gizmo Gadget",
-                                buttons: [{
-                                  type: "postback",
-                                  title: "Select",
-                                  payload: "pb_gizmo_gadget"
-                                }],
-                              }, {
-                                title: "Gizmo Pal 2",
-                                image_url: SERVER_URL + "/assets/GizmoPal_2-2.png",
-                                buttons: [{
-                                  type: "postback",
-                                  title: "Select",
-                                  payload:"my payload"
-                                }]
-                              }, {
-                                title: "Gizmo Pal 1",
-                                image_url: SERVER_URL + "/assets/LG-Gizmopal1.jpg",
-                                buttons: [{
-                                  type: "postback",
-                                  title: "Select",
-                                  payload:"my payload"
-                                }]
-                              }]
-                            }
-                          }
-                     });
+    sendTextMessage(senderID, "Which Gizmo do you have?", 
+    function(){sendGenericMessage(senderID, 
+             {
+              attachment: {
+                type: "template",
+                payload: {
+                  template_type: "generic",
+                  elements: [{
+                    image_url: SERVER_URL + "/assets/GizmoGadget.png",
+                    title: "Gizmo Gadget",
+                    buttons: [{
+                      type: "postback",
+                      title: "Select",
+                      payload: "pb_gizmo_gadget"
+                    }],
+                  }, {
+                    title: "Gizmo Pal 2",
+                    image_url: SERVER_URL + "/assets/GizmoPal_2-2.png",
+                    buttons: [{
+                      type: "postback",
+                      title: "Select",
+                      payload:"my payload"
+                    }]
+                  }, {
+                    title: "Gizmo Pal 1",
+                    image_url: SERVER_URL + "/assets/LG-Gizmopal1.jpg",
+                    buttons: [{
+                      type: "postback",
+                      title: "Select",
+                      payload:"my payload"
+                    }]
+                  }]
+                }
+              }
+         });
+        
+    });
+    
 }
+    
+
 /*
  * Message Read Event
  *
