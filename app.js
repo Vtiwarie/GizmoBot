@@ -692,7 +692,8 @@ function receivedPostback(event) {
               }]);
      } else if(checkRegex(/\bpb_ending_calls_still_issues_2\b/im, payload)) {
          sendTextMessage(senderID, "Ok. If gizmo still not able to hang up calls when calling out. Next step here is to reset the gizmo.",
-            function() {sendGenericMessage(senderID, 
+            function() {sendTextMessage(senderID, "Which Gizmo do you have?", 
+                function(){sendGenericMessage(senderID, 
                          {
                           attachment: {
                             type: "template",
@@ -700,7 +701,7 @@ function receivedPostback(event) {
                               template_type: "generic",
                               elements: [{
                                 image_url: SERVER_URL + "/assets/GizmoGadget.png",
-                                title: "Which Gizmo do you have?",
+                                title: "Gizmo Gadget",
                                 buttons: [{
                                   type: "postback",
                                   title: "Select",
@@ -726,8 +727,10 @@ function receivedPostback(event) {
                             }
                           }
                      });
+                    
+                });
                 
-            })
+            });
      }
     
 }
