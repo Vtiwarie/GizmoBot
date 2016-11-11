@@ -438,7 +438,7 @@ function receivedMessage(event) {
                   template_type: "generic",
                   elements: [{
                     image_url: SERVER_URL + "/assets/Call_Icon.png",
-                    title: "Help",
+                    title: "",
                     buttons: [{
                       type: "postback",
                       title: "Unable to Call Gizmo",
