@@ -280,18 +280,22 @@ function receivedMessage(event) {
       messageId, quickReplyPayload);
       
       if(checkRegex(/\bqr_yes_Unable_to_Call_Gizmo\b/im, quickReplyPayload)) {
-         sendQuickReply(senderID, 
-              [{
-              "content_type":"text",
-              "title":"Yes",
-              "payload":"qr_yes_call_connects"
-            },
-            {
-              "content_type":"text",
-              "title":"No",
-              "payload":"qr_no_call_connects"
-            }],
-            "Great! If you are able to receive calls from the gizmo. Is possible that you might have an outbound caller ID Block.\nIf you dial gizmo # directly with *82 + Gizmo # does the call connect?");
+          sendTextMessage(senderID, "Great! If you are able to receive calls from the gizmo. Is possible that you might have an outbound caller ID Block", 
+            function(){sendQuickReply(senderID, 
+                          [{
+                          "content_type":"text",
+                          "title":"Yes",
+                          "payload":"qr_yes_call_connects"
+                        },
+                        {
+                          "content_type":"text",
+                          "title":"No",
+                          "payload":"qr_no_call_connects"
+                        }],
+                        "If you dial gizmo # directly with *82 + Gizmo # does the call connect?");
+                
+            });
+         
      }  else if(checkRegex(/\bqr_yes_call_connects\b/im, quickReplyPayload)) {
          sendTextMessage(senderID,"Great! Glad you where able to call. In order to con-tinue calling gizmo you will need to dial *82 to un-block your number when dialing out.\n"
          + "Alternatively you go to the Block and Unblock Ser-vices page in My Verizon to enabled outbound caller ID.")
