@@ -325,26 +325,32 @@ function receivedMessage(event) {
          sendQuickReply(senderID, [{
               "content_type":"text",
               "title":"2",
-              "payload":"qr_enter_customer_input"
+              "payload":"qr_enter_customer_input_2"
             },
             {
               "content_type":"text",
               "title":"3",
-              "payload":"qr_enter_customer_input"
+              "payload":"qr_enter_customer_input_3"
             },
             {
               "content_type":"text",
               "title":"4",
-              "payload":"qr_enter_customer_input"
+              "payload":"qr_enter_customer_input_4"
             },
             {
               "content_type":"text",
               "title":"Other",
-              "payload":"qr_enter_customer_input"
+              "payload":"qr_enter_customer_input_other"
             }],
             "If you listen to the recording it should give you an announcement # at the end. What was the first number?");
          
-     } else if(checkRegex(/\bqr_enter_customer_input\b/im, quickReplyPayload)) {
+     } else if(checkRegex(/\bqr_enter_customer_input_2\b/im, quickReplyPayload)) {
+         sendTextMessage(senderID, "Please check the number and dial again. You must dial the area code plus the number you wish to reach.");
+     }else if(checkRegex(/\bqr_enter_customer_input_3\b/im, quickReplyPayload)) {
+          sendTextMessage(senderID, "Please contact customer care to further assist.\nYou can call from your Verizon cell by dialing #611 or calling 1 (800) 922-0204.");
+     }else if(checkRegex(/\bqr_enter_customer_input_4\b/im, quickReplyPayload)) {
+          sendTextMessage(senderID, "Please check the number and dial again. You must dial the area code plus the number you wish to reach.");
+     }else if(checkRegex(/\bqr_enter_customer_input_other\b/im, quickReplyPayload)) {
          
          
      } else if(false) {
