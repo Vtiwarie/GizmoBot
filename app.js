@@ -353,41 +353,44 @@ function receivedMessage(event) {
 
          
      } else if(checkRegex(/\bqr_no_call_other_contacts\b/im, quickReplyPayload)) {
-          sendTextMessage(senderID, "Ok. Next step here is to reset the gizmo. This will allow the gizmo to re-activate on network.");
-          sendGenericMessage(senderID, 
-             {
-              attachment: {
-                type: "template",
-                payload: {
-                  template_type: "generic",
-                  elements: [{
-                    title: "Gizmo Gadget",
-                    image_url: SERVER_URL + "/assets/GizmoGadget.png",
-                    buttons: [{
-                      type: "postback",
-                      title: "Select",
-                      payload: "pb_gizmo_gadget"
-                    }],
-                  }, {
-                    title: "Gizmo Pal 2",
-                    image_url: SERVER_URL + "/assets/GizmoPal_2-2.png",
-                    buttons: [{
-                      type: "postback",
-                      title: "Select",
-                      payload: "my payload"
-                    }],
-                  }, {
-                    title: "Gizmo Pal 1",
-                    image_url: SERVER_URL + "/assets/LG-Gizmopal1-2.jpg",
-                    buttons: [{
-                      type: "postback",
-                      title: "Select",
-                      payload: "my payload"
-                    }],
-                  }]
-                }
-              }
-         });
+          sendTextMessage(senderID, "Ok. Next step here is to reset the gizmo. This will allow the gizmo to re-activate on network.", 
+              function(){sendGenericMessage(senderID, 
+                         {
+                          attachment: {
+                            type: "template",
+                            payload: {
+                              template_type: "generic",
+                              elements: [{
+                                title: "Gizmo Gadget",
+                                image_url: SERVER_URL + "/assets/GizmoGadget.png",
+                                buttons: [{
+                                  type: "postback",
+                                  title: "Select",
+                                  payload: "pb_gizmo_gadget"
+                                }],
+                              }, {
+                                title: "Gizmo Pal 2",
+                                image_url: SERVER_URL + "/assets/GizmoPal_2-2.png",
+                                buttons: [{
+                                  type: "postback",
+                                  title: "Select",
+                                  payload: "my payload"
+                                }],
+                              }, {
+                                title: "Gizmo Pal 1",
+                                image_url: SERVER_URL + "/assets/LG-Gizmopal1-2.jpg",
+                                buttons: [{
+                                  type: "postback",
+                                  title: "Select",
+                                  payload: "my payload"
+                                }],
+                              }]
+                            }
+                          }
+                     });
+                  
+              });
+          
          
      } else if(checkRegex(/\bqr_gizmo_gadget_proceed\b/im, quickReplyPayload)) {
          sendTextMessage(senderID, "Connect the Gizmo device to the charger or a com-puter via the USB cable.", 
