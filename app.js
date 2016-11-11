@@ -361,7 +361,7 @@ function receivedMessage(event) {
                 payload: {
                   template_type: "generic",
                   elements: [{
-                    title: "Which Gizmo do you have?",
+                    title: "Gizmo Gadget",
                     image_url: SERVER_URL + "/assets/GizmoGadget.png",
                     buttons: [{
                       type: "postback",
@@ -369,7 +369,7 @@ function receivedMessage(event) {
                       payload: "pb_gizmo_gadget"
                     }],
                   }, {
-                    title: "Which Gizmo do you have?",
+                    title: "Gizmo Pal 2",
                     image_url: SERVER_URL + "/assets/GizmoPal 2-2.png",
                     buttons: [{
                       type: "postback",
@@ -377,7 +377,7 @@ function receivedMessage(event) {
                       payload: "my payload"
                     }],
                   }, {
-                    title: "Which Gizmo do you have?",
+                    title: "Gizmo Pal 1",
                     image_url: SERVER_URL + "/assets/LG-Gizmopal1 - 2.jpg",
                     buttons: [{
                       type: "postback",
