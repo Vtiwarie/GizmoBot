@@ -705,7 +705,7 @@ function receivedPostback(event) {
                                 buttons: [{
                                   type: "postback",
                                   title: "Select",
-                                  payload: "my payload"
+                                  payload: "bpb_gizmo_gadget"
                                 }],
                               }, {
                                 title: "Gizmo Pal 2",
