@@ -301,7 +301,8 @@ function receivedMessage(event) {
             function(){sendTextMessage(senderID, "Alternatively you go to the Block and Unblock Ser-vices page in My Verizon to enabled outbound caller ID.")});
          
      } else if(checkRegex(/\bqr_no_call_connects\b/im, quickReplyPayload)) {
-         sendQuickReply(senderID, 
+         sendTextMessage(senderID, "When you called the gizmo did you get this message?", 
+             function(){sendQuickReply(senderID, 
               [{
               "content_type":"text",
               "title":"Yes",
@@ -312,7 +313,9 @@ function receivedMessage(event) {
               "title":"no",
               "payload":"qr_no_got_call_message"
             }],
-            "When you called the gizmo did you get this mes-sage?\n\"Welcome to Verizon Wireless. The cellular custom-er you have called is not available at this time. Please try your call again later.\"");
+            "\"Welcome to Verizon Wireless. The cellular custom-er you have called is not available at this time. Please try your call again later.\"");
+             });
+         
          
      } else if(checkRegex(/\bqr_yes_got_call_message\b/im, quickReplyPayload)) {
          sendTextMessage(senderID, "This typically indicates that unit is powered off or not connected to the network. Please power gizmo off and back on.");
