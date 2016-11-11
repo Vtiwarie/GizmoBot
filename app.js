@@ -318,8 +318,9 @@ function receivedMessage(event) {
          
          
      } else if(checkRegex(/\bqr_yes_got_call_message\b/im, quickReplyPayload)) {
-         sendTextMessage(senderID, "This typically indicates that unit is powered off or not connected to the network. Please power gizmo off and back on.");
-          sendTextMessage(senderID, "Once the gizmo is powered back on make an out-bound call from the gizmo to ensure its connected to network.")
+         sendTextMessage(senderID, "This typically indicates that unit is powered off or not connected to the network. Please power gizmo off and back on.",
+            function(){sendTextMessage(senderID, "Once the gizmo is powered back on make an out-bound call from the gizmo to ensure its connected to network.")});
+          
      } else if(checkRegex(/\bqr_no_got_call_message\b/im, quickReplyPayload)) {
          sendQuickReply(senderID, [{
               "content_type":"text",
