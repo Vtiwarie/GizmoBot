@@ -503,7 +503,7 @@ function receivedMessage(event) {
                     image_url: SERVER_URL + "/assets/registration_icon.png",
                     buttons: [{
                       type: "postback",
-                      url: "https://www.oculus.com/en-us/touch/",
+                      title: "Change Primary Caregiver",
                       payload: "pb_change_caregiver"
                     }, {
                       type: "postback",
