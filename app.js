@@ -780,7 +780,7 @@ function receivedPostback(event) {
               }]);
      } else if(checkRegex(/\bpb_ending_calls_still_issues_2\b/im, payload)) {
          sendTextMessage(senderID, "Ok. If gizmo still not able to hang up calls when calling out. Next step here is to reset the gizmo.",
-            function() {Flow_Which_Gizmo();}
+            function() {Flow_Which_Gizmo();});
      }
     
 }
