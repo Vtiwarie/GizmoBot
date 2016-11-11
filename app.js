@@ -474,7 +474,7 @@ function receivedMessage(event) {
   }
 
   if (messageText) {
-     if(checkRegex(/\bh\w*e\w*l\w*p\b/im, messageText)) {
+     if(checkRegex(/^h\w*e\w*l\w*p$/im, messageText)) {
          sendGenericMessage(senderID, 
              {
               attachment: {
