@@ -454,7 +454,7 @@ function receivedMessage(event) {
                     }],
                   }, {
                     title: "Unable to Link, Linking Replace-ment Gizmo, Changing Primary CareGiver, Adding Caregivers",
-                    image_url: SERVER_URL + "/assets/Registration_Icon.png",
+                    image_url: SERVER_URL + "/assets/Register_Icon.png",
                     buttons: [{
                       type: "web_url",
                       url: "https://www.oculus.com/en-us/touch/",
