@@ -502,9 +502,9 @@ function receivedMessage(event) {
                     title: "Unable to Link, Linking Replace-ment Gizmo, Changing Primary CareGiver, Adding Caregivers",
                     image_url: SERVER_URL + "/assets/registration_icon.png",
                     buttons: [{
-                      type: "web_url",
+                      type: "postback",
                       url: "https://www.oculus.com/en-us/touch/",
-                      title: "Open Web URL"
+                      payload: "pb_change_caregiver"
                     }, {
                       type: "postback",
                       title: "Call Postback",
@@ -553,23 +553,7 @@ function receivedMessage(event) {
             payload: "pb_gizmo_receives_call"
           }]);
     } else if(checkRegex(/(\bc\w*h\w*a\w*n\w*g).*(\bc\w*a\w*r\w*e*(\s)*g\w*i\w*v\w*e\w*r)/im, messageText)) {
-         sendTextMessage(senderID, "Great! I can help you with your request to change primary caregiver.", 
-            function(){sendQuickReply(senderID, [
-             {
-              "content_type":"text",
-              "title":"Proceed",
-              "payload":"qr_proceed_primary_cg"
-            },
-            {
-              "content_type":"text",
-              "title":"No",
-              "payload":"qr_cancel_primary_cg"
-            }],
-            "To change primary caregiver the gizmo will need to be reset.");
-                
-            });
-         
-         
+         Flow_Change_Giver(senderID);
     } else if(checkRegex(/(\bR\w*e\w*g\w*i\w*s\w*t\w*e\w*r).*(\bG\w*i\w*z\w*m\w*o)/im, messageText) || checkRegex(/\bP\w*a\w*i\w*r/im, messageText)  || checkRegex(/\bL\w*i\w*n\w*k/im, messageText)) {
 
         sendButtonMessage(senderID, "Great! I can help you with your request to link with the gizmo. First to better provide instructions are you trying to pair with:", 
@@ -759,8 +743,32 @@ function receivedPostback(event) {
      } else if(checkRegex(/\bpb_ending_calls_still_issues_2\b/im, payload)) {
          sendTextMessage(senderID, "Ok. If gizmo still not able to hang up calls when calling out. Next step here is to reset the gizmo.",
             function() {Flow_Which_Gizmo(senderID);});
+            
+     } else if(checkRegex(/\bpb_change_caregiver\b/im, payload)) {
+         
+         
      }
+     
+     
     
+}
+
+function Flow_Change_Giver(senderID) {
+    sendTextMessage(senderID, "Great! I can help you with your request to change primary caregiver.", 
+            function(){sendQuickReply(senderID, [
+             {
+              "content_type":"text",
+              "title":"Proceed",
+              "payload":"qr_proceed_primary_cg"
+            },
+            {
+              "content_type":"text",
+              "title":"No",
+              "payload":"qr_cancel_primary_cg"
+            }],
+            "To change primary caregiver the gizmo will need to be reset.");
+                
+            });
 }
 
 function Flow_Which_Gizmo(senderID) {
