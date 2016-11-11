@@ -397,13 +397,20 @@ function receivedMessage(event) {
                   sendTextMessage(senderID, "You can call from your Verizon cell by dialing #611 or calling 1 (800) 922-0204.");
             });
 
-     }else if(false) {
+     } else if(checkRegex(/\bqr_proceed_primary_cg\b/im, quickReplyPayload)) {
+         Flow_Which_Gizmo(senderID);
+     } else if(checkRegex(/\bqr_cancel_primary_cg\b/im, quickReplyPayload)) {
+         sendTextMessage(senderID, "Ok. If you need instructions again please feel free to ask how to \“change primary caregiver\” or say “Help” for other options");
+     } else if(false) {
          
          
-     }else if(false) {
+     } else if(false) {
          
          
-     }else if(false) {
+     } else if(false) {
+         
+         
+     } else if(false) {
          
          
      } else if(checkRegex(/\bqr_no_Unable_to_Call_Gizmo\b/im, quickReplyPayload)) {
@@ -546,18 +553,37 @@ function receivedMessage(event) {
             payload: "pb_gizmo_receives_call"
           }]);
     } else if(checkRegex(/(\bc\w*h\w*a\w*n\w*g).*(\bc\w*a\w*r\w*e*(\s)*g\w*i\w*v\w*e\w*r)/im, messageText)) {
-         sendButtonMessage(senderID, "Great! I can help you with your request to change primary caregiver. To change primary caregivers the gizmo will need to be reset. Before we proceed please be aware that this will require linking to the gizmo and adding all contacts & settings as if it were a  new gizmo. ", 
-		      [{
-            type:"web_url",
-            url: SERVER_URL + "/assets/Factory Reset Gizmo.pdf",
-            title:"Yes, Please send me reset instructions?",
-            webview_height_ratio: "compact"
-          }, {
-            type:"web_url",
-            url: SERVER_URL + "/assets/Adding or Removing Caregivers.pdf",
-            title:"No, I just want to change other contacts on the gizmo.",
-            webview_height_ratio: "compact" 
-          }]);
+         sendTextMessage(senderID, "Great! I can help you with your request to change primary caregiver.", 
+            function(){sendQuickReply(senderID, [
+             {
+              "content_type":"text",
+              "title":"Proceed",
+              "payload":"qr_proceed_primary_cg"
+            },
+            {
+              "content_type":"text",
+              "title":"No",
+              "payload":"qr_cancel_primary_cg"
+            }],
+            "To change primary caregiver the gizmo will need to be reset.");
+                
+                /*
+                sendButtonMessage(senderID, "To change primary caregivers the gizmo will need to be reset. Before we proceed please be aware that this will require linking to the gizmo and adding all contacts & settings as if it were a  new gizmo. ", 
+                		      [{
+                            type:"web_url",
+                            url: SERVER_URL + "/assets/Factory Reset Gizmo.pdf",
+                            title:"Yes, Please send me reset instructions?",
+                            webview_height_ratio: "compact"
+                          }, {
+                            type:"web_url",
+                            url: SERVER_URL + "/assets/Adding or Removing Caregivers.pdf",
+                            title:"No, I just want to change other contacts on the gizmo.",
+                            webview_height_ratio: "compact" 
+                          }]);
+                                
+                            });
+         */
+         
     } else if(checkRegex(/(\bR\w*e\w*g\w*i\w*s\w*t\w*e\w*r).*(\bG\w*i\w*z\w*m\w*o)/im, messageText) || checkRegex(/\bP\w*a\w*i\w*r/im, messageText)  || checkRegex(/\bL\w*i\w*n\w*k/im, messageText)) {
 
         sendButtonMessage(senderID, "Great! I can help you with your request to link with the gizmo. First to better provide instructions are you trying to pair with:", 
