@@ -341,7 +341,8 @@ function receivedMessage(event) {
               "content_type":"text",
               "title":"Other",
               "payload":"qr_enter_customer_input"
-            }]);
+            }],
+            "If you listen to the recording it should give you an announcement # at the end. What was the first number?");
          
      } else if(checkRegex(/\bqr_enter_customer_input\b/im, quickReplyPayload)) {
          
