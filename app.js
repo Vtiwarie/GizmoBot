@@ -567,22 +567,8 @@ function receivedMessage(event) {
             }],
             "To change primary caregiver the gizmo will need to be reset.");
                 
-                /*
-                sendButtonMessage(senderID, "To change primary caregivers the gizmo will need to be reset. Before we proceed please be aware that this will require linking to the gizmo and adding all contacts & settings as if it were a  new gizmo. ", 
-                		      [{
-                            type:"web_url",
-                            url: SERVER_URL + "/assets/Factory Reset Gizmo.pdf",
-                            title:"Yes, Please send me reset instructions?",
-                            webview_height_ratio: "compact"
-                          }, {
-                            type:"web_url",
-                            url: SERVER_URL + "/assets/Adding or Removing Caregivers.pdf",
-                            title:"No, I just want to change other contacts on the gizmo.",
-                            webview_height_ratio: "compact" 
-                          }]);
-                                
-                            });
-         */
+            });
+         
          
     } else if(checkRegex(/(\bR\w*e\w*g\w*i\w*s\w*t\w*e\w*r).*(\bG\w*i\w*z\w*m\w*o)/im, messageText) || checkRegex(/\bP\w*a\w*i\w*r/im, messageText)  || checkRegex(/\bL\w*i\w*n\w*k/im, messageText)) {
 
