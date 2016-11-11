@@ -666,15 +666,70 @@ function receivedPostback(event) {
           
          
      } else if(checkRegex(/\bpb_gizmo_receives_call\b/im, payload)) {
-         sendButtonMessage(senderID, "When a caregiver or contact Initiates call to Gizmo. Once the call is answered the Gizmo will not discon-nect call. Call on this case must be disconnected by contact to end call.", [{
+         sendButtonMessage(senderID, "When a caregiver or contact Initiates call to Gizmo. Once the call is answered the Gizmo will not discon-nect call. Call on this case must be disconnected by contact to end call.", 
+            [{
                 type: "postback",
                 title: "I'm still having Issues",
                 payload: "pb_ending_calls_still_issues"
     
               }]);
                 
+     } else if(checkRegex(/\pb_ending_calls_still_issues\b/im, payload)) {
+         sendButtonMessage(senderID, "When a caregiver or contact Initiates call to Gizmo. Once the call is answered the Gizmo will not discon-nect call. Call on this case must be disconnected by contact to end call.", 
+            [{
+                type: "postback",
+                title: "Unable to call gizmo",
+                payload: ""
+              },
+              {
+                type: "postback",
+                title: "Calls Dropping",
+                payload: ""
+              },
+              {
+                type: "postback",
+                title: "I'm still having issues ending calls",
+                payload: "pb_ending_calls_still_issues_2"
+              }]);
+     } else if(checkRegex(/\pb_ending_calls_still_issues_2\b/im, payload)) {
+         sendTextMessage(senderID, "Ok. If gizmo still not able to hang up calls when calling out. Next step here is to reset the gizmo.",
+            function() {sendGenericMessage(senderID, 
+                         {
+                          attachment: {
+                            type: "template",
+                            payload: {
+                              template_type: "generic",
+                              elements: [{
+                                image_url: SERVER_URL + "/assets/GizmoGadget.png",
+                                title: "Which Gizmo do you have?",
+                                buttons: [{
+                                  type: "postback",
+                                  title: "Select",
+                                  payload: ""
+                                }],
+                              }, {
+                                title: "Gizmo Pal 2",
+                                image_url: SERVER_URL + "/assets/GizmoPal 2-2.png",
+                                buttons: [{
+                                  type: "postback",
+                                  title: "Select",
+                                  payload:""
+                                }]
+                              }, {
+                                title: "Gizmo Pal 1",
+                                image_url: SERVER_URL + "/assets/LG-Gizmopal1.jpg",
+                                buttons: [{
+                                  type: "postback",
+                                  title: "Select",
+                                  payload:""
+                                }]
+                              }]
+                            }
+                          }
+                     });
+                
+            })
      }
-
     
 }
 /*
