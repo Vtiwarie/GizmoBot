@@ -503,7 +503,7 @@ function receivedMessage(event) {
                     image_url: SERVER_URL + "/assets/registration_icon.png",
                     buttons: [{
                       type: "postback",
-                      title: "Change Primary Caregiver",
+                      title: "Change Caregiver",
                       payload: "pb_change_caregiver"
                     }, {
                       type: "postback",
@@ -745,8 +745,7 @@ function receivedPostback(event) {
             function() {Flow_Which_Gizmo(senderID);});
             
      } else if(checkRegex(/\bpb_change_caregiver\b/im, payload)) {
-         
-         
+         Flow_Change_Giver(senderID);
      }
      
      
