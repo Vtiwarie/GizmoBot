@@ -674,11 +674,11 @@ function receivedPostback(event) {
               }]);
                 
      } else if(checkRegex(/\bpb_ending_calls_still_issues\b/im, payload)) {
-         sendButtonMessage(senderID, "When a caregiver or contact Initiates call to Gizmo. Once the call is answered the Gizmo will not discon-nect call. Call on this case must be disconnected by contact to end call.", 
+         sendButtonMessage(senderID, "Ok, What other issues are you having with calls?", 
             [{
                 type: "postback",
                 title: "Unable to call gizmo",
-                payload: "my payload"
+                payload: "pb_unable_call_gizmo"
               },
               {
                 type: "postback",
