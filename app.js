@@ -298,7 +298,7 @@ function receivedMessage(event) {
          
      }  else if(checkRegex(/\bqr_yes_call_connects\b/im, quickReplyPayload)) {
          sendTextMessage(senderID,"Great! Glad you where able to call. In order to con-tinue calling gizmo you will need to dial *82 to un-block your number when dialing out.",
-            function(){sendTextMessage(senderID, "Alternatively you go to the Block and Unblock Ser-vices page in My Verizon to enabled outbound caller ID.")});
+            function(){sendTextMessage(senderID, "Alternatively you go to the Block and Unblock Services page in My Verizon to enabled outbound caller ID.")});
          
      } else if(checkRegex(/\bqr_no_call_connects\b/im, quickReplyPayload)) {
          sendTextMessage(senderID, "When you called the gizmo did you get this message?", 
@@ -346,7 +346,7 @@ function receivedMessage(event) {
               "title":"No",
               "payload":"qr_no_call_other_contacts"
             }],
-            "Can the gizmo call any other contact that is regis-tered?");
+            "Can the gizmo call any other contact that is registered?");
      } else if(checkRegex(/\bqr_yes_call_other_contacts\b/im, quickReplyPayload)) {
          sendTextMessage(senderID, "Please check to ensure the gizmo shows you as a contact. If you’re a secondary caregiver or contact.");
           sendTextMessage(senderID, "Please call the primary caregiver to ensure your add-ed to the gizmo.");
@@ -370,7 +370,7 @@ function receivedMessage(event) {
                     }],
                   }, {
                     title: "Gizmo Pal 2",
-                    image_url: SERVER_URL + "/assets/GizmoPal 2-2.png",
+                    image_url: SERVER_URL + "/assets/GizmoPal_2-2.png",
                     buttons: [{
                       type: "postback",
                       title: "Select",
@@ -378,7 +378,7 @@ function receivedMessage(event) {
                     }],
                   }, {
                     title: "Gizmo Pal 1",
-                    image_url: SERVER_URL + "/assets/LG-Gizmopal1 - 2.jpg",
+                    image_url: SERVER_URL + "/assets/LG-Gizmopal1-2.jpg",
                     buttons: [{
                       type: "postback",
                       title: "Select",
@@ -720,7 +720,7 @@ function receivedPostback(event) {
                                 }],
                               }, {
                                 title: "Gizmo Pal 2",
-                                image_url: SERVER_URL + "/assets/GizmoPal 2-2.png",
+                                image_url: SERVER_URL + "/assets/GizmoPal_2-2.png",
                                 buttons: [{
                                   type: "postback",
                                   title: "Select",
