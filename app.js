@@ -636,18 +636,21 @@ function receivedPostback(event) {
   //sendTextMessage(senderID, (payload !== null && payload !== undefined && payload != "") ? payload : "Postback called");
   
      if(checkRegex(/\bpb_unable_call_gizmo\b/im, payload)) {
-         sendQuickReply(senderID, 
-              [{
-              "content_type":"text",
-              "title":"Yes",
-              "payload":"qr_yes_Unable_to_Call_Gizmo"
-            },
-            {
-              "content_type":"text",
-              "title":"No",
-              "payload":"qr_no_Unable_to_Call_Gizmo"
-            }],
-            "I’m sorry you are having difficulties calling the gizmo. In order to better assist you I do have a series of ques-tions.\nIs the Gizmo able to call you?");
+         sendTextMessage(senderID, "I’m sorry you are having difficulties calling the gizmo. In order to better assist you I do have a series of ques-tions.", 
+            function(){sendQuickReply(senderID, 
+                          [{
+                          "content_type":"text",
+                          "title":"Yes",
+                          "payload":"qr_yes_Unable_to_Call_Gizmo"
+                        },
+                        {
+                          "content_type":"text",
+                          "title":"No",
+                          "payload":"qr_no_Unable_to_Call_Gizmo"
+                        }],
+                        "Is the Gizmo able to call you?");
+                        });
+         
      } else if(checkRegex(/\bpb_gizmo_gadget\b/im, payload)) {
          sendTextMessage(senderID, "A factory data reset may help with a blank or frozen screen, apps crashing or freezing, keypad/touchscreen problems, can't hear, device making noises, can't make or receive calls, and device won't", 
          function(){sendQuickReply(senderID, 
