@@ -154,8 +154,8 @@ function receivedAuthentication(event) {
   var passThroughParam = event.optin.ref;
 
   //console.log("Received authentication for user %d and page %d with pass " +
-    "through param '%s' at %d", senderID, recipientID, passThroughParam, 
-    timeOfAuth);
+   // "through param '%s' at %d", senderID, recipientID, passThroughParam, 
+    //timeOfAuth);
 
   // When an authentication is received, we'll send a message back to the sender
   // to let them know it was successful.
@@ -256,7 +256,7 @@ function receivedMessage(event) {
   var message = event.message;
 
   //console.log("Received message for user %d and page %d at %d with message:", 
-    senderID, recipientID, timeOfMessage);
+   // senderID, recipientID, timeOfMessage);
   //console.log(JSON.stringify(message));
 
   var isEcho = message.is_echo;
@@ -272,12 +272,12 @@ function receivedMessage(event) {
   if (isEcho) {
     // Just logging message echoes to console
     //console.log("Received echo for message %s and app %d with metadata %s", 
-      messageId, appId, metadata);
+     // messageId, appId, metadata);
     return;
   } else if (quickReply) {
     var quickReplyPayload = quickReply.payload;
     //console.log("Quick reply for message %s with payload %s",
-      messageId, quickReplyPayload);
+     // messageId, quickReplyPayload);
       
       if(checkRegex(/\bqr_yes_Unable_to_Call_Gizmo\b/im, quickReplyPayload)) {
           sendTextMessage(senderID, "Great! If you are able to receive calls from the gizmo. It's possible that you might have an outbound caller ID Block.", 
@@ -570,7 +570,7 @@ function receivedDeliveryConfirmation(event) {
   if (messageIDs) {
     messageIDs.forEach(function(messageID) {
       //console.log("Received delivery confirmation for message ID: %s", 
-        messageID);
+      //  messageID);
     });
   }
 
@@ -595,7 +595,7 @@ function receivedPostback(event) {
   var payload = event.postback.payload;
 
   //console.log("Received postback for user %d and page %d with payload '%s' " + 
-    "at %d", senderID, recipientID, payload, timeOfPostback);
+   // "at %d", senderID, recipientID, payload, timeOfPostback);
     
     
   // When a postback is called, we'll send a message back to the sender to 
@@ -829,7 +829,7 @@ function receivedMessageRead(event) {
   var sequenceNumber = event.read.seq;
 
   //console.log("Received message read event for watermark %d and sequence " +
-    "number %d", watermark, sequenceNumber);
+   // "number %d", watermark, sequenceNumber);
 }
 
 /*
@@ -848,7 +848,7 @@ function receivedAccountLink(event) {
   var authCode = event.account_linking.authorization_code;
 
   //console.log("Received account link event with for user %d with status %s " +
-    "and auth code %s ", senderID, status, authCode);
+   // "and auth code %s ", senderID, status, authCode);
 }
 
 /*
@@ -1245,10 +1245,10 @@ function callSendAPI(messageData, callbackFunc) {
 
       if (messageId) {
         //console.log("Successfully sent message with id %s to recipient %s", 
-          messageId, recipientId);
+        //  messageId, recipientId);
       } else {
       //console.log("Successfully called Send API for recipient %s", 
-        recipientId);
+      //  recipientId);
       }
       if(callbackFunc && typeof callbackFunc == 'function') {
           callbackFunc();
