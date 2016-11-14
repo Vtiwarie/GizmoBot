@@ -478,19 +478,7 @@ function receivedMessage(event) {
          Flow_Help(senderID);
      } else if(checkRegex(/\bh\w*i\w*\b/im, messageText)) {
         sendTextMessage(senderID, "Hi. What do you want from me??");         
-     } else if(false) {
-         
-     } else if(false) {
-         
-     } else if(false) {
-         
-     } else if(false) {
-         
-     } else if(false) {
-         
-     } else if(false) {
-         
-     } else if(checkRegex(/((\br\w*e\w*j\w*e\w*c\w*t)|(\be\w*n\w*d)).*\bcall/im, messageText)) {
+     }  else if(checkRegex(/((\br\w*e\w*j\w*e\w*c\w*t)|(\be\w*n\w*d)).*\bcall/im, messageText)) {
         sendButtonMessage(senderID, "I am sorry that you are experiencing issues with the ending  calls feature.  Is this happening  when:", [{
             type: "postback",
             title: 'Gizmo calls out?',
