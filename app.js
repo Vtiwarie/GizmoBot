@@ -72,7 +72,7 @@ if (!(APP_SECRET && VALIDATION_TOKEN && PAGE_ACCESS_TOKEN && SERVER_URL)) {
 app.get('/webhook', function(req, res) {
   if (req.query['hub.mode'] === 'subscribe' &&
       req.query['hub.verify_token'] === VALIDATION_TOKEN) {
-    console.log("Validating webhook");
+    //console.log("Validating webhook");
     res.status(200).send(req.query['hub.challenge']);
   } else {
     console.error("Failed validation. Make sure the validation tokens match.");
@@ -153,7 +153,7 @@ function receivedAuthentication(event) {
   // plugin.
   var passThroughParam = event.optin.ref;
 
-  console.log("Received authentication for user %d and page %d with pass " +
+  //console.log("Received authentication for user %d and page %d with pass " +
     "through param '%s' at %d", senderID, recipientID, passThroughParam, 
     timeOfAuth);
 
@@ -197,7 +197,7 @@ function makeGreeting(event) {
  */
 app.post('/webhook', function (req, res) {
   var data = req.body;
-  //console.log(req);
+  ////console.log(req);
 
   // Make sure this is a page subscription
   if (data.object == 'page') {
@@ -222,7 +222,7 @@ app.post('/webhook', function (req, res) {
         } else if (messagingEvent.account_linking) {
           receivedAccountLink(messagingEvent);
         } else {
-          console.log("Webhook received unknown messagingEvent: ", messagingEvent);
+          //console.log("Webhook received unknown messagingEvent: ", messagingEvent);
         }
       });
     });
@@ -255,9 +255,9 @@ function receivedMessage(event) {
   var timeOfMessage = event.timestamp;
   var message = event.message;
 
-  console.log("Received message for user %d and page %d at %d with message:", 
+  //console.log("Received message for user %d and page %d at %d with message:", 
     senderID, recipientID, timeOfMessage);
-  console.log(JSON.stringify(message));
+  //console.log(JSON.stringify(message));
 
   var isEcho = message.is_echo;
   var messageId = message.mid;
@@ -271,12 +271,12 @@ function receivedMessage(event) {
 
   if (isEcho) {
     // Just logging message echoes to console
-    console.log("Received echo for message %s and app %d with metadata %s", 
+    //console.log("Received echo for message %s and app %d with metadata %s", 
       messageId, appId, metadata);
     return;
   } else if (quickReply) {
     var quickReplyPayload = quickReply.payload;
-    console.log("Quick reply for message %s with payload %s",
+    //console.log("Quick reply for message %s with payload %s",
       messageId, quickReplyPayload);
       
       if(checkRegex(/\bqr_yes_Unable_to_Call_Gizmo\b/im, quickReplyPayload)) {
@@ -507,14 +507,14 @@ function receivedMessage(event) {
 
 function log(msg, funcName) {
     if(!msg || msg.length < 1 || msg == '') {
-        console.log('Could not report log');
+        //console.log('Could not report log');
     }
     var logText = "--------LOG-------\n";
     var funcLogText = "--------" + funcName + "-------\n";
     if(funcName && funcName.length>0 && funcName != '') {
-         console.log(funcLogText + msg);
+         //console.log(funcLogText + msg);
     } else {
-        console.log(logText + msg);
+        //console.log(logText + msg);
     }
     return;
    
@@ -545,9 +545,9 @@ function debugFunc(func) {
         
 function errorMsg(funcName, errMsg) {
     if(funcName && typeof funcName == 'string' && errMsg && typeof errMsg == 'string') {
-        console.log('ERROR [' + funcName + ']: ' + errMsg);
+        //console.log('ERROR [' + funcName + ']: ' + errMsg);
     } else {
-        console.log('ERROR: [No message]');
+        //console.log('ERROR: [No message]');
     }
 }
 
@@ -569,12 +569,12 @@ function receivedDeliveryConfirmation(event) {
 
   if (messageIDs) {
     messageIDs.forEach(function(messageID) {
-      console.log("Received delivery confirmation for message ID: %s", 
+      //console.log("Received delivery confirmation for message ID: %s", 
         messageID);
     });
   }
 
-  console.log("All message before %d were delivered.", watermark);
+  //console.log("All message before %d were delivered.", watermark);
 }
 
 
@@ -594,7 +594,7 @@ function receivedPostback(event) {
   // button for Structured Messages. 
   var payload = event.postback.payload;
 
-  console.log("Received postback for user %d and page %d with payload '%s' " + 
+  //console.log("Received postback for user %d and page %d with payload '%s' " + 
     "at %d", senderID, recipientID, payload, timeOfPostback);
     
     
@@ -828,7 +828,7 @@ function receivedMessageRead(event) {
   var watermark = event.read.watermark;
   var sequenceNumber = event.read.seq;
 
-  console.log("Received message read event for watermark %d and sequence " +
+  //console.log("Received message read event for watermark %d and sequence " +
     "number %d", watermark, sequenceNumber);
 }
 
@@ -847,7 +847,7 @@ function receivedAccountLink(event) {
   var status = event.account_linking.status;
   var authCode = event.account_linking.authorization_code;
 
-  console.log("Received account link event with for user %d with status %s " +
+  //console.log("Received account link event with for user %d with status %s " +
     "and auth code %s ", senderID, status, authCode);
 }
 
@@ -1152,7 +1152,7 @@ function sendQuickReply(recipientId, quick_reply_message_array, text, attachment
  *
  */
 function sendReadReceipt(recipientId) {
-  console.log("Sending a read receipt to mark message as seen");
+  //console.log("Sending a read receipt to mark message as seen");
 
   var messageData = {
     recipient: {
@@ -1169,7 +1169,7 @@ function sendReadReceipt(recipientId) {
  *
  */
 function sendTypingOn(recipientId) {
-  console.log("Turning typing indicator on");
+  //console.log("Turning typing indicator on");
 
   var messageData = {
     recipient: {
@@ -1186,7 +1186,7 @@ function sendTypingOn(recipientId) {
  *
  */
 function sendTypingOff(recipientId) {
-  console.log("Turning typing indicator off");
+  //console.log("Turning typing indicator off");
 
   var messageData = {
     recipient: {
@@ -1244,10 +1244,10 @@ function callSendAPI(messageData, callbackFunc) {
       var messageId = body.message_id;
 
       if (messageId) {
-        console.log("Successfully sent message with id %s to recipient %s", 
+        //console.log("Successfully sent message with id %s to recipient %s", 
           messageId, recipientId);
       } else {
-      console.log("Successfully called Send API for recipient %s", 
+      //console.log("Successfully called Send API for recipient %s", 
         recipientId);
       }
       if(callbackFunc && typeof callbackFunc == 'function') {
@@ -1263,7 +1263,7 @@ function callSendAPI(messageData, callbackFunc) {
 // Webhooks must be available via SSL with a certificate signed by a valid 
 // certificate authority.
 app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
+  //console.log('Node app is running on port', app.get('port'));
 });
 
 module.exports = app;
