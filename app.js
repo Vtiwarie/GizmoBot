@@ -479,16 +479,7 @@ function receivedMessage(event) {
      } else if(checkRegex(/\bh\w*i\w*\b/im, messageText)) {
         sendTextMessage(senderID, "Hi. What do you want from me??");         
      }  else if(checkRegex(/((\br\w*e\w*j\w*e\w*c\w*t)|(\be\w*n\w*d)).*\bcall/im, messageText)) {
-        sendButtonMessage(senderID, "I am sorry that you are experiencing issues with the ending  calls feature.  Is this happening  when:", [{
-            type: "postback",
-            title: 'Gizmo calls out?',
-            payload: "pb_gizmo_calls_out"
-
-          }, {
-            type: "postback",
-            title: "Gizmo receives call?",
-            payload: "pb_gizmo_receives_call"
-          }]);
+        Flow_End_Call();
     } else if(checkRegex(/(\bc\w*h\w*a\w*n\w*g).*(\bc\w*a\w*r\w*e*(\s)*g\w*i\w*v\w*e\w*r)/im, messageText)) {
          Flow_Change_Giver(senderID);
     } else if(checkRegex(/(\bR\w*e\w*g\w*i\w*s\w*t\w*e\w*r).*(\bG\w*i\w*z\w*m\w*o)/im, messageText) || checkRegex(/\bP\w*a\w*i\w*r/im, messageText)  || checkRegex(/\bL\w*i\w*n\w*k/im, messageText)) {
@@ -686,6 +677,8 @@ function receivedPostback(event) {
             
      } else if(checkRegex(/\bpb_change_caregiver\b/im, payload)) {
          Flow_Change_Giver(senderID);
+     } else if(checkRegex(/\bpb_end_call\b/im, payload)) {
+         Flow_End_Call(senderID);
      }
      
      
@@ -745,6 +738,19 @@ function Flow_Help(senderID) {
                 }
               }
          });
+}
+
+function Flow_End_Call(senderID) {
+    sendButtonMessage(senderID, "I am sorry that you are experiencing issues with the ending  calls feature.  Is this happening  when:", [{
+            type: "postback",
+            title: 'Gizmo calls out?',
+            payload: "pb_gizmo_calls_out"
+
+          }, {
+            type: "postback",
+            title: "Gizmo receives call?",
+            payload: "pb_gizmo_receives_call"
+          }]);
 }
 
 function Flow_Change_Giver(senderID) {
