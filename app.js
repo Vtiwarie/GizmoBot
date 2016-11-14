@@ -475,58 +475,7 @@ function receivedMessage(event) {
 
   if (messageText) {
      if(checkRegex(/\bh\w*e\w*l\w*p\b/im, messageText)) {
-         sendGenericMessage(senderID, 
-             {
-              attachment: {
-                type: "template",
-                payload: {
-                  template_type: "generic",
-                  elements: [{
-                    image_url: SERVER_URL + "/assets/Call_Icon.png",
-                    title: "Phone Troubleshooting",
-                    buttons: [{
-                      type: "postback",
-                      title: "Unable to Call Gizmo",
-                      payload: "pb_unable_call_gizmo"
-                    }, {
-                      type: "postback",
-                      title: "Gizmo Drops Out",
-                      payload: "Call Droppings",
-                    }, {
-                      type: "postback",
-                      title: "Cannot Call Out",
-                      payload: "Cannot Call Out",
-                    }],
-                  }, 
-                  {
-                    title: "Unable to Link, Linking Replace-ment Gizmo, Changing Primary CareGiver, Adding Caregivers",
-                    image_url: SERVER_URL + "/assets/registration_icon.png",
-                    buttons: [{
-                      type: "postback",
-                      title: "Change Caregiver",
-                      payload: "pb_change_caregiver"
-                    }, {
-                      type: "postback",
-                      title: "Call Postback",
-                      payload: "Payload for second bubble",
-                    }]
-                  }, 
-                  {
-                    title: "Setting up Place Alerts, Schedule Location Checks, To-Do List",
-                    image_url: SERVER_URL + "/assets/Gear.png",
-                    buttons: [{
-                      type: "web_url",
-                      url: "https://www.oculus.com/en-us/touch/",
-                      title: "Open Web URL"
-                    }, {
-                      type: "postback",
-                      title: "Call Postback",
-                      payload: "Payload for second bubble",
-                    }]
-                  }]
-                }
-              }
-         });
+         Flow_Help(senderID);
      } else if(checkRegex(/\bh\w*i\w*\b/im, messageText)) {
         sendTextMessage(senderID, "Hi. What do you want from me??");         
      } else if(false) {
@@ -674,7 +623,9 @@ function receivedPostback(event) {
   // let them know it was successful
   //sendTextMessage(senderID, (payload !== null && payload !== undefined && payload != "") ? payload : "Postback called");
   
-     if(checkRegex(/\bpb_unable_call_gizmo\b/im, payload)) {
+     if(checkRegex(/\bpb_help\b/im, payload)) {
+          Flow_Help(senderID);
+     } else if(checkRegex(/\bpb_unable_call_gizmo\b/im, payload)) {
          sendTextMessage(senderID, "I’m sorry you are having difficulties calling the gizmo. In order to better assist you I do have a series of questions.", 
             function(){sendQuickReply(senderID, 
                           [{
@@ -750,6 +701,61 @@ function receivedPostback(event) {
      
      
     
+}
+
+function Flow_Help(senderID) {
+    sendGenericMessage(senderID, 
+             {
+              attachment: {
+                type: "template",
+                payload: {
+                  template_type: "generic",
+                  elements: [{
+                    image_url: SERVER_URL + "/assets/Call_Icon.png",
+                    title: "Phone Troubleshooting",
+                    buttons: [{
+                      type: "postback",
+                      title: "Unable to Call Gizmo",
+                      payload: "pb_unable_call_gizmo"
+                    }, {
+                      type: "postback",
+                      title: "Gizmo Drops Out",
+                      payload: "Call Droppings",
+                    }, {
+                      type: "postback",
+                      title: "Cannot Call Out",
+                      payload: "Cannot Call Out",
+                    }],
+                  }, 
+                  {
+                    title: "Unable to Link, Linking Replace-ment Gizmo, Changing Primary CareGiver, Adding Caregivers",
+                    image_url: SERVER_URL + "/assets/registration_icon.png",
+                    buttons: [{
+                      type: "postback",
+                      title: "Change Caregiver",
+                      payload: "pb_change_caregiver"
+                    }, {
+                      type: "postback",
+                      title: "Call Postback",
+                      payload: "Payload for second bubble",
+                    }]
+                  }, 
+                  {
+                    title: "Setting up Place Alerts, Schedule Location Checks, To-Do List",
+                    image_url: SERVER_URL + "/assets/Gear.png",
+                    buttons: [{
+                      type: "web_url",
+                      url: "https://www.oculus.com/en-us/touch/",
+                      title: "Open Web URL"
+                    }, {
+                      type: "postback",
+                      title: "Call Postback",
+                      payload: "Payload for second bubble",
+                    }]
+                  }]
+                }
+              }
+         });
 }
 
 function Flow_Change_Giver(senderID) {
