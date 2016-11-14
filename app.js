@@ -475,8 +475,7 @@ function receivedMessage(event) {
 
   if (messageText) {
      if(checkRegex(/\bh\w*e\w*l\w*p\b/im, messageText)) {
-         sendTextMessage(senderID, "Welcome to Gizmo Support!", 
-         function(){Flow_Help(senderID);});
+         Flow_Help(senderID);
      } else if(checkRegex(/\bh\w*i\w*\b/im, messageText)) {
         sendTextMessage(senderID, "Hi. What do you want from me??");         
      } else if(false) {
@@ -625,7 +624,8 @@ function receivedPostback(event) {
   //sendTextMessage(senderID, (payload !== null && payload !== undefined && payload != "") ? payload : "Postback called");
   
      if(checkRegex(/\bpb_help\b/im, payload)) {
-          Flow_Help(senderID);
+          sendTextMessage(senderID, "Welcome to Gizmo Support!", 
+         function(){Flow_Help(senderID);});
      } else if(checkRegex(/\bpb_unable_call_gizmo\b/im, payload)) {
          sendTextMessage(senderID, "I’m sorry you are having difficulties calling the gizmo. In order to better assist you I do have a series of questions.", 
             function(){sendQuickReply(senderID, 
