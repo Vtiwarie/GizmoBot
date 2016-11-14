@@ -475,7 +475,8 @@ function receivedMessage(event) {
 
   if (messageText) {
      if(checkRegex(/\bh\w*e\w*l\w*p\b/im, messageText)) {
-         Flow_Help(senderID);
+         sendTextMessage(senderID, "Welcome to Gizmo Support!", 
+         function(){Flow_Help(senderID);});
      } else if(checkRegex(/\bh\w*i\w*\b/im, messageText)) {
         sendTextMessage(senderID, "Hi. What do you want from me??");         
      } else if(false) {
